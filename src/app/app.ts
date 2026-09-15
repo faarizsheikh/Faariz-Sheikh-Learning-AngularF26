@@ -1,12 +1,18 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+// app.component.ts:
+
+import { NgOptimizedImage } from '@angular/common';
+import { Component } from '@angular/core';
 
 @Component({
-  imports: [RouterOutlet],
+  imports: [NgOptimizedImage],
   selector: 'app-root',
-  styleUrl: './app.css',
+  styleUrl: './app.scss',
   templateUrl: './app.html',
 })
+
 export class App {
-  protected readonly title = signal('Faariz-Sheikh-Learning-AngularF26');
+  quotedFilm : string = "IT";
+  yearReleased: number = 1990;
+  character: string = "Pennywise the Dancing Clown"
+  actor: string = "Tim Curry";
 }

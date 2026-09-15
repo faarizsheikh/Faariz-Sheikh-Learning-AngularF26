@@ -1,0 +1,30 @@
+/* -- COMPONENT-LEVEL STYLING (app.scss): -- */
+
+:root {
+  font-size: 62.5%; /* 62.5% x default font size (16px) =  10px [Learned long ago from YT Channel, Danni Krossing] */
+}
+
+h1 {
+  font-size: 3.2em;
+
+  span {
+    font-style: italic;
+  }
+}
+
+h1, p {
+  text-align: center;
+}
+
+p, blockquote {
+  font-size: 2em;
+}
+
+p span, blockquote {
+  font-style: italic;
+}
+
+img {
+  display: flex;
+  justify-self: center;
+}
