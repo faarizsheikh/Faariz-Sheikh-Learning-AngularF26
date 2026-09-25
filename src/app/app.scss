@@ -1,30 +1,212 @@
 /* -- COMPONENT-LEVEL STYLING (app.scss): -- */
 
-:root {
-  font-size: 62.5%; /* 62.5% x default font size (16px) =  10px [Learned long ago from YT Channel, Danni Krossing] */
-}
+.container {
+  background-color: #141313;
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 600px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(193, 18, 31, 0.25);
 
-h1 {
-  font-size: 3.2em;
+  h1 {
+    color: #c1121f;
+    font-size: 3.2em;
+    text-align: center;
+    margin-bottom: 20px;
+  }
 
-  span {
-    font-style: italic;
+  h2 {
+    color: #b8a45a;
+    font-size: 2.8em;
+  }
+
+  h3 {
+    align-self: center;
+    color: #e8dddd;
+    font-size: 2.6em;
+    text-align: center;
+    margin-block: 0 20px;
+    padding-top: 15px;
+  }
+
+  /* CARD STYLING */
+  .char-card {
+    background-color: #201c1c;
+    margin-bottom: 15px;
+    display: grid;
+    grid-auto-rows: auto;
+    grid-template-areas: "chead cbody";
+    grid-template-columns: 250px 1fr;
+    row-gap: 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+
+    .char-card-header {
+      grid-area: chead;
+      background-color: #4a1018;
+      display: flex;
+      justify-content: center;
+
+      h3 {
+        align-self: center;
+        color: #e8dddd;
+        font-size: 2.6em;
+        text-align: center;
+        margin-block: 0 20px;
+        padding-top: 15px;
+      }
+    }
+
+    // Card body:
+    .char-card-body {
+      grid-area: cbody;
+      padding: 0 15px 15px 15px;
+
+      blockquote {
+        background-color: #110f10;
+        color: #b94a3b;
+        font-style: italic;
+        font-size: 1.8em;
+        text-align: center;
+
+        &::before {
+          content: "“";
+        }
+
+        &::after {
+          content: "”";
+        }
+      }
+
+      p {
+        color: #c9c3c3;
+        font-size: 1.8em;
+        margin: 5px 0;
+
+        .lbl-name {
+          color: #b8a45a;
+          font-weight: bold;
+        }
+
+        .lbl-name:not(.desc-lbl) {
+          margin-right: 6px;
+        }
+      }
+
+      .stat-container {
+        display: flex;
+        gap: 10px;
+        margin: 5px 0;
+
+        .stat-alive {
+          color: #8caa83;
+          margin-right: 29px;
+        }
+
+        .stat-dead {
+          color: #c1121f;
+        }
+      }
+
+      .desc-sec {
+        display: block;
+
+        .desc-lbl {
+          display: block;
+          text-align: center;
+          margin-top: 15px;
+        }
+      }
+
+      .toggle-btn {
+        margin: 0;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 4px;
+        background-color: dodgerblue;
+        color: #fff;
+        font-size: 1.4em;
+        width: 100px;
+        cursor: pointer;
+      }
+
+      .tb2 {
+        display: none;
+      }
+    }
   }
 }
 
-h1, p {
-  text-align: center;
-}
+@media screen and (max-width: 425.333px) {
+  .container .char-card {
+    display: block;
 
-p, blockquote {
-  font-size: 2em;
-}
+    .char-card-header {
+      display: flex;
+      align-content: center;
+      justify-content: center;
+    }
 
-p span, blockquote {
-  font-style: italic;
-}
+    .char-card-body {
+      .tb1 {
+        display: none;
+      }
 
-img {
-  display: flex;
-  justify-self: center;
+      .tb2 {
+        display: flex;
+        justify-self: center;
+        margin-top: 15px;
+      }
+
+      .desc-sec {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+
+        .desc-value {
+          display: block;
+          text-align: left;
+          max-width: 85%;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 320px) {
+  .container .char-card {
+    .char-card-body {
+      > p:not(.desc-sec) {
+        text-align: center;
+
+        .lbl-name {
+          display: block;
+          margin-right: 0;
+          margin-bottom: 3px;
+          margin-top: 15px;
+        }
+      }
+
+      .stat-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        > p {
+          text-align: center;
+
+          .lbl-name {
+            display: block;
+            margin-right: 0;
+            margin-bottom: 3px;
+            margin-top: 15px;
+          }
+        }
+
+        .stat-alive {
+          margin-right: 0;
+        }
+      }
+    }
+  }
 }

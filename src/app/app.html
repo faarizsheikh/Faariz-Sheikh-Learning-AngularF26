@@ -1,10 +1,58 @@
 <!-- app.html: -->
 
 <div class="container">
-  <h1><span>{{quotedFilm}}</span> ({{yearReleased}})</h1>
-  <img ngSrc="../assets/pennywise-tcurry.png" width="400" height="300" alt="Pennywise" priority="true">
-  <blockquote>"Excuse me, sir. Do you have a Prince Albert in a can?
-    What. You do? Well, you better let him out.
-    A-ha! A-ha! A-ha!"</blockquote>
-  <p>— <span>{{character}}</span>, played by {{actor}}</p>
+  <h1>IT: Chapter One (2017)</h1>
+  <h2>Characters:</h2>
+
+  @for (character of characters; track character.id) {
+  <div class="char-card">
+    <div class="char-card-header">
+      <h3>{{ character.name }}</h3>
+    </div>
+
+    <div class="char-card-body">
+      <blockquote>{{ character.quote }}</blockquote>
+      <p><span class="lbl-name age-lbl">Age:</span>{{ character.age }}</p>
+      <p>
+        <span class="lbl-name gender-lbl">Gender:</span>{{ character.gender }}
+      </p>
+
+      <div class="stat-container">
+        <p>
+          <span class="lbl-name stat-lbl">Status:</span>
+          <span class="stat-value">
+            @if (character.status_alive) {
+            <span class="stat-alive">Alive</span>
+            } @else {
+            <span class="stat-dead">Deceased</span>
+            }
+          </span>
+        </p>
+
+        <button class="toggle-btn tb1" (click)="toggleStatus(character)">
+          Update
+        </button>
+      </div>
+
+      <p>
+        <span class="lbl-name actor-lbl">Played by:</span>{{ character.played_by
+        }}
+      </p>
+      <p>
+        <span class="lbl-name ctype-lbl">Character Type:</span>{{
+        character.character_type }}
+      </p>
+      <p class="desc-sec">
+        <span class="lbl-name desc-lbl">Description:</span>
+        <span class="desc-value">{{character.description }}</span>
+      </p>
+
+      <button class="toggle-btn tb2" (click)="toggleStatus(character)">
+        Update Status
+      </button>
+    </div>
+  </div>
+  } @empty{
+  <h3 class="Empty">No characters to show.</h3>
+  }
 </div>
