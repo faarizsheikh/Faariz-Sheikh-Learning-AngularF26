@@ -21,12 +21,12 @@
   }
 
   h3 {
-    align-self: center;
     color: #e8dddd;
     font-size: 2.6em;
     text-align: center;
     margin-block: 0 20px;
     padding-top: 15px;
+    align-self: center;
   }
 
   /* CARD STYLING */
@@ -42,18 +42,18 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
 
     .char-card-header {
-      grid-area: chead;
       background-color: #4a1018;
       display: flex;
+      grid-area: chead;
       justify-content: center;
 
       h3 {
-        align-self: center;
         color: #e8dddd;
         font-size: 2.6em;
         text-align: center;
         margin-block: 0 20px;
         padding-top: 15px;
+        align-self: center;
       }
     }
 
@@ -65,8 +65,8 @@
       blockquote {
         background-color: #110f10;
         color: #b94a3b;
-        font-style: italic;
         font-size: 1.8em;
+        font-style: italic;
         text-align: center;
 
         &::before {
@@ -94,9 +94,9 @@
       }
 
       .stat-container {
+        margin: 5px 0;
         display: flex;
         gap: 10px;
-        margin: 5px 0;
 
         .stat-alive {
           color: #8caa83;
@@ -112,21 +112,20 @@
         display: block;
 
         .desc-lbl {
-          display: block;
           text-align: center;
           margin-top: 15px;
+          display: block;
         }
       }
 
       .toggle-btn {
-        margin: 0;
-        padding: 0.5rem 1rem;
-        border: none;
-        border-radius: 4px;
         background-color: dodgerblue;
         color: #fff;
         font-size: 1.4em;
+        margin: 0;
+        padding: 0.5rem 1rem;
         width: 100px;
+        border: none;
         cursor: pointer;
       }
 
@@ -153,21 +152,21 @@
       }
 
       .tb2 {
+        margin-top: 15px;
         display: flex;
         justify-self: center;
-        margin-top: 15px;
       }
 
       .desc-sec {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
         width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
 
         .desc-value {
-          display: block;
           text-align: left;
           max-width: 85%;
+          display: block;
         }
       }
     }
