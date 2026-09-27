@@ -1,9 +1,11 @@
+// my-data.ts:
+
 export interface ExtraInfo {
   images?: string;
   status_alive?: boolean;
 }
 
-export interface MyData extends ExtraInfo {
+export interface Characters extends ExtraInfo {
   // The topic is: Characters from IT (2017) - Directed by Andrés Muschietti
   id: number;
   name: string;

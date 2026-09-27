@@ -1,4 +1,7 @@
-import { Component } from "@angular/core";
+// characters-card.ts:
+
+import { Component, input } from "@angular/core";
+import { Characters } from "../../Shared/Models/my-data";
 
 @Component({
   imports: [],
@@ -6,5 +9,6 @@ import { Component } from "@angular/core";
   styleUrl: "./characters-card.scss",
   templateUrl: "./characters-card.html",
 })
-
-export class CharactersCard {}
+export class CharactersCard {
+  character = input.required<Characters>();
+}
