@@ -1,3 +1,5 @@
+// characters-card.spec.ts:
+
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { CharactersCard } from "./characters-card";
 
