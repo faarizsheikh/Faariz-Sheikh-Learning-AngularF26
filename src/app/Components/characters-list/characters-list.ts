@@ -1,8 +1,9 @@
 // characters-list.ts:
 
 import { Component } from '@angular/core';
-import { Characters, statEvent } from '../../Shared/Models/my-data';
 import { CharactersCard } from '../characters-card/characters-card';
+import { Characters } from '../../Shared/Models/characters-data';
+import { statEvent } from '../../Shared/Models/events-data';
 
 @Component({
   imports: [CharactersCard],
@@ -31,6 +32,7 @@ export class CharactersList {
         "Driven by the survivor's guilt, " +
         'he seeks revenge on Pennywise, ' +
         'The Dancing Clown for killing his little brother, George.',
+      imageLink: '../../assets/char-imgs/bill-den.png',
     },
     {
       id: 2,
@@ -45,6 +47,7 @@ export class CharactersList {
         'George Elmer Denbrough is a sweet, young boy, ' +
         'whose death causes deep trauma and survivor’s guilt for Bill, ' +
         "driving the Losers' Club to hunt the evil entity",
+      imageLink: '../../assets/char-imgs/george-den.png',
     },
     {
       id: 3,
@@ -66,6 +69,7 @@ export class CharactersList {
         'preys on the fears of children in ' +
         'Derry, Maine, every 27 years. ' +
         'He is responsible for the death of George Elmer Denbrough.',
+      imageLink: '../../assets/char-imgs/pw-clown.png',
     },
     {
       id: 4,
@@ -88,6 +92,7 @@ export class CharactersList {
         'Due to his non-stop jokes, sarcasm, and impressions ' +
         'to deal with fear and trauma, ' +
         'He is nicknamed as “Trashmouth.”',
+      imageLink: '../../assets/char-imgs/rich-toz.png',
     },
     {
       id: 5,
@@ -102,6 +107,7 @@ export class CharactersList {
         'Stanley Uris is a cautious, methodical ' +
         "member of the Losers' Club who is the son of a local rabbi. " +
         'He is the most logical thinker in the group.',
+      imageLink: '../../assets/char-imgs/stan-ur.png',
     },
     {
       id: 6,
@@ -119,6 +125,7 @@ export class CharactersList {
         'He is dominated by his fiercely ' +
         'overprotective mother, Sonia, ' +
         'who convinces him he is sickly and asthmatic.',
+      imageLink: '../../assets/char-imgs/eds-k.png',
     },
     {
       id: 7,
@@ -140,6 +147,7 @@ export class CharactersList {
         'independent adolescent. She carries heavy emotional ' +
         'pain from severe bullying at school ' +
         'and abuse at home by her father, Alvin Marsh.',
+      imageLink: '../../assets/char-imgs/bev-marsh.png',
     },
     {
       id: 8,
@@ -158,6 +166,7 @@ export class CharactersList {
         'Michael Hanlon is a resilient, isolated ' +
         'African-American teenager ' +
         "who becomes the final core member of the Losers' Club.",
+      imageLink: '../../assets/char-imgs/mike-han.png',
     },
     {
       id: 9,
@@ -175,11 +184,15 @@ export class CharactersList {
         'Benjamin Hanscom is a new kid ' +
         'who is overweight, soft-spoken, and deeply intelligent. ' +
         'He may be shy but he is also a bookworm.',
+      imageLink: '../../assets/char-imgs/ben-hc.png',
     },
   ];
 
+  // Function to console a message upon toggle:
   handleStat(event: statEvent): void {
-    // Function to console a message upon toggle
-    console.log(`Character ${event.id}: Status updated to ${event.newStat}.`);
+    console.log(
+      `Character ${event.id}:
+        Status updated to ${event.newStat} from ${event.oldStat}.`,
+    );
   }
 }
