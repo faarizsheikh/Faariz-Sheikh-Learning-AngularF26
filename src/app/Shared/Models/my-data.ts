@@ -16,3 +16,8 @@ export interface Characters extends ExtraInfo {
   character_type: string;
   description: string;
 }
+export interface statEvent {
+  // Will be used for @Output
+  id: number;
+  newStat: 'alive' | 'dead' | 'unknown';
+}
