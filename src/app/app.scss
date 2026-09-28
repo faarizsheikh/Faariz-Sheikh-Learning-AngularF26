@@ -1,1 +1,10 @@
 /* -- COMPONENT-LEVEL STYLING (app.scss): -- */
+
+.container {
+  background-color: #141313;
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 600px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px #4a1018;
+}

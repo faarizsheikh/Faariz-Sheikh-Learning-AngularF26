@@ -2,5 +2,41 @@
 
 :root {
   background-color: #000;
+  font-family: Roboto, sans-serif;
   font-size: 62.5%; /* 62.5% of 16px = 10px */
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.5;
+}
+
+h1 {
+  color: #c1121f;
+  font-size: 3.2em;
+  text-align: center;
+}
+
+h2 {
+  color: #b8a45a;
+  font-size: 2.8em;
+}
+
+h3 {
+  color: #e8dddd;
+}
+
+p,
+a,
+blockquote {
+  color: #e8dddd;
+  font-size: 1.8em;
+  line-height: 1.75;
+}
+
+blockquote {
+  font-style: italic;
+  text-align: center;
+  padding: 10px;
 }
