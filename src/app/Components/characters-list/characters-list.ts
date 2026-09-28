@@ -1,7 +1,7 @@
 // characters-list.ts:
 
 import { Component } from '@angular/core';
-import { Characters } from '../../Shared/Models/my-data';
+import { Characters, statEvent } from '../../Shared/Models/my-data';
 import { CharactersCard } from '../characters-card/characters-card';
 
 @Component({
@@ -176,7 +176,10 @@ export class CharactersList {
         'who is overweight, soft-spoken, and deeply intelligent. ' +
         'He may be shy but he is also a bookworm.',
     },
-    // So on, so forth.
-    // ...Might OR might not add more characters to the array.
   ];
+
+  handleStat(event: statEvent): void {
+    // Function to console a message upon toggle
+    console.log(`Character ${event.id}: Status updated to ${event.newStat}.`);
+  }
 }
