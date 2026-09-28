@@ -1,1 +1,10 @@
 /* -- characters-list.scss: -- */
+
+.characters-list {
+  .empty-list {
+    h3,
+    p {
+      text-align: center;
+    }
+  }
+}

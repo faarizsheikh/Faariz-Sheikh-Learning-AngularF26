@@ -1,1 +1,110 @@
 /* -- characters-card.scss: -- */
+
+.characters-card {
+  background-color: #141313;
+  color: #fff;
+  margin: 15px auto;
+  padding: 15px;
+  max-width: 600px;
+  border: 2px solid #c1121f;
+  border-radius: 5px;
+
+  header {
+    background-color: #4a1018;
+    margin-bottom: 15px;
+    padding: 10px;
+
+    h3 {
+      font-size: 2.6rem;
+      text-align: center;
+      margin: 0;
+    }
+  }
+
+  blockquote {
+    background-color: #110f10;
+    color: #b94a3b;
+    font-size: 1.8rem;
+    font-style: italic;
+    text-align: center;
+    padding: 10px;
+
+    &::before {
+      content: '“';
+    }
+
+    &::after {
+      content: '”';
+    }
+  }
+
+  p {
+    font-size: 1.8rem;
+
+    strong {
+      color: #b8a45a;
+    }
+
+    &:last-of-type > strong {
+      display: block;
+    }
+  }
+
+  // Unique badge styling:
+  .badge {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin: 5px 0;
+    padding: 5px 10px;
+    display: inline-block;
+    border-radius: 4px;
+
+    &.protagonist,
+    &.co-protagonist {
+      color: #000;
+    }
+
+    &.protagonist {
+      background-color: #b8a45a;
+    }
+
+    &.co-protagonist {
+      background-color: #8caa83;
+    }
+
+    &.antagonist,
+    &.catalyst,
+    &.supporting {
+      color: #fff;
+    }
+
+    &.antagonist {
+      background-color: #c1121f;
+    }
+
+    &.catalyst {
+      background-color: #b94a3b;
+    }
+
+    &.supporting {
+      background-color: #555;
+    }
+  }
+
+  // Status styling:
+  .status {
+    font-weight: bold;
+
+    &.alive {
+      color: #8caa83;
+    }
+
+    &.dead {
+      color: #c1121f;
+    }
+
+    &.unknown {
+      color: #54a5f5;
+    }
+  }
+}

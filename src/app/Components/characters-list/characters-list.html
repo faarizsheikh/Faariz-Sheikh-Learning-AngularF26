@@ -1,3 +1,14 @@
 <!-- characters-list.html: -->
 
-<p>characters-list works!</p>
+<div class="characters-list">
+  <h2>Characters:</h2>
+  @for (character of characters; track character.id) {
+    <app-characters-card [character]="character"></app-characters-card>
+  } @empty {
+    <div class="empty-list">
+      <h3>No characters are currently available.</h3>
+      <p>Please add at least one character to the list.</p>
+      <p>(The ability to add characters is coming soon.)</p>
+    </div>
+  }
+</div>

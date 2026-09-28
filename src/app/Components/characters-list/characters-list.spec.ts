@@ -1,9 +1,9 @@
 // characters-list.spec.ts:
 
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { CharactersList } from "./characters-list";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CharactersList } from './characters-list';
 
-describe("CharactersList", () => {
+describe('CharactersList', () => {
   let component: CharactersList;
   let fixture: ComponentFixture<CharactersList>;
 
@@ -17,7 +17,7 @@ describe("CharactersList", () => {
     await fixture.whenStable();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

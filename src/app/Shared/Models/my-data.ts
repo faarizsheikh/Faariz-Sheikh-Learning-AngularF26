@@ -2,7 +2,7 @@
 
 export interface ExtraInfo {
   images?: string;
-  status_alive?: boolean;
+  status?: boolean;
 }
 
 export interface Characters extends ExtraInfo {
