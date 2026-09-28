@@ -1,44 +1,62 @@
 <!-- characters-card.html: -->
 
 <div class="characters-card">
-  <header>
+  <div class="card-header">
     <h3>{{ character().name }}</h3>
-  </header>
+    <img
+      [alt]="character().name"
+      [ngSrc]="character().imageLink"
+      [title]="character().name"
+      class="game-image"
+      width="480"
+      height="485"
+      priority="true"
+    />
+  </div>
 
-  <blockquote>{{ character().quote }}</blockquote>
+  <div class="card-body">
+    <blockquote>{{ character().quote }}</blockquote>
 
-  <p><strong>Age:</strong> {{ character().age }}</p>
-  <p><strong>Gender:</strong> {{ character().gender }}</p>
-  <p><strong>Played by:</strong> {{ character().played_by }}</p>
+    <p><strong>Age:</strong>{{ character().age }}</p>
+    <p><strong>Gender:</strong>{{ character().gender }}</p>
+    <p><strong>Played by:</strong>{{ character().played_by }}</p>
 
-  @switch (character().character_type) {
-    @case ('Protagonist') {
-      <span class="badge protagonist">Protagonist</span>
-    }
-    @case ('Co-Protagonist') {
-      <span class="badge co-protagonist">Co-Protagonist</span>
-    }
-    @case ('Antagonist') {
-      <span class="badge antagonist">Antagonist</span>
-    }
-    @case ('Catalyst') {
-      <span class="badge catalyst">Catalyst</span>
-    }
-    @default {
-      <span class="badge supporting">Supporting Character</span>
-    }
-  }
+    <div class="badge-container">
+      @switch (character().character_type) {
+        @case ('Protagonist') {
+          <span class="badge protagonist">Protagonist</span>
+        }
+        @case ('Co-Protagonist') {
+          <span class="badge co-protagonist">Co-Protagonist</span>
+        }
+        @case ('Antagonist') {
+          <span class="badge antagonist">Antagonist</span>
+        }
+        @case ('Catalyst') {
+          <span class="badge catalyst">Catalyst</span>
+        }
+        @default {
+          <span class="badge supporting">Supporting Character</span>
+        }
+      }
+    </div>
 
-  @if (character().status !== undefined) {
-    @if (character().status) {
-      <p class="status alive">Status: Alive</p>
-    } @else {
-      <p class="status dead">Status: Dead</p>
-    }
-  } @else {
-    <p class="status unknown">Status: Unknown</p>
-  }
-  <button class="toggle-btn" (click)="toggleStat()">Update</button>
+    <div class="status-container">
+      <p>
+        <strong>Status:</strong>
+        @if (character().status !== undefined) {
+          @if (character().status) {
+            <span class="status alive">Alive</span>
+          } @else {
+            <span class="status dead">Dead</span>
+          }
+        } @else {
+          <span class="status unknown">Unknown</span>
+        }
+      </p>
+      <button class="toggle-btn" (click)="toggleStat()">Update</button>
+    </div>
 
-  <p><strong>Description:</strong>{{ character().description }}</p>
+    <p><strong>Description:</strong>{{ character().description }}</p>
+  </div>
 </div>

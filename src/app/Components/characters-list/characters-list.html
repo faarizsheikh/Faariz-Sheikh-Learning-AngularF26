@@ -2,6 +2,7 @@
 
 <div class="characters-list">
   <h2>Characters:</h2>
+
   @for (character of characters; track character.id) {
     <app-characters-card
       [character]="character"

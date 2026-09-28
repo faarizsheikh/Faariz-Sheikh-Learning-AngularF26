@@ -9,7 +9,8 @@
   border: 2px solid #c1121f;
   border-radius: 5px;
 
-  header {
+  // CARD HEADER STYLING:
+  .card-header {
     background-color: #4a1018;
     margin-bottom: 15px;
     padding: 10px;
@@ -19,92 +20,131 @@
       text-align: center;
       margin: 0;
     }
-  }
 
-  blockquote {
-    background-color: #110f10;
-    color: #b94a3b;
-    font-size: 1.8rem;
-    font-style: italic;
-    text-align: center;
-    padding: 10px;
-
-    &::before {
-      content: '“';
-    }
-
-    &::after {
-      content: '”';
+    img {
+      width: 480px;
+      height: 485px;
+      display: flex;
+      justify-self: center;
     }
   }
 
-  p {
-    font-size: 1.8rem;
+  // CARD BODY STYLING:
+  .card-body {
+    // Paragraphs and blockquote styling:
+    blockquote {
+      background-color: #110f10;
+      color: #b94a3b;
+      font-size: 1.8rem;
+      font-style: italic;
+      text-align: center;
+      padding: 10px;
 
-    strong {
-      color: #b8a45a;
+      &::before {
+        content: '“';
+      }
+
+      &::after {
+        content: '”';
+      }
     }
 
-    &:last-of-type > strong {
-      display: block;
-    }
-  }
+    p {
+      font-size: 1.8rem;
 
-  // Unique badge styling:
-  .badge {
-    font-size: 1.4rem;
-    font-weight: bold;
-    margin: 5px 0;
-    padding: 5px 10px;
-    display: inline-block;
-    border-radius: 4px;
+      strong {
+        color: #b8a45a;
 
-    &.protagonist,
-    &.co-protagonist {
-      color: #000;
+        &:not(:last-of-type > strong) {
+          margin-right: 5px;
+        }
+      }
+
+      &:last-of-type > strong {
+        display: block;
+      }
     }
 
-    &.protagonist {
-      background-color: #b8a45a;
+    // Unique badge styling:
+    .badge-container {
+      .badge {
+        font-size: 1.4rem;
+        font-weight: bold;
+        margin: 5px 0;
+        padding: 5px 10px;
+        display: inline-block;
+        border-radius: 10px;
+
+        &.protagonist,
+        &.co-protagonist {
+          color: #000;
+        }
+
+        &.antagonist,
+        &.catalyst,
+        &.supporting {
+          color: #fff;
+        }
+
+        &.protagonist {
+          background-color: #b8a45a;
+        }
+
+        &.co-protagonist {
+          background-color: #8caa83;
+        }
+
+        &.antagonist {
+          background-color: #c1121f;
+        }
+
+        &.catalyst {
+          background-color: #b94a3b;
+        }
+
+        &.supporting {
+          background-color: #555;
+        }
+      }
     }
 
-    &.co-protagonist {
-      background-color: #8caa83;
-    }
+    // Status styling:
+    .status-container {
+      display: flex;
+      gap: 15px;
 
-    &.antagonist,
-    &.catalyst,
-    &.supporting {
-      color: #fff;
-    }
+      p {
+        min-width: 141px;
+        display: flex;
+        gap: 10px;
 
-    &.antagonist {
-      background-color: #c1121f;
-    }
+        .alive {
+          color: #8caa83;
+        }
 
-    &.catalyst {
-      background-color: #b94a3b;
-    }
+        .dead {
+          color: #c1121f;
+        }
 
-    &.supporting {
-      background-color: #555;
-    }
-  }
+        .unknown {
+          color: #54a5f5;
+        }
+      }
 
-  // Status styling:
-  .status {
-    font-weight: bold;
-
-    &.alive {
-      color: #8caa83;
-    }
-
-    &.dead {
-      color: #c1121f;
-    }
-
-    &.unknown {
-      color: #54a5f5;
+      // Status toggle button styling:
+      .toggle-btn {
+        background-color: dodgerblue;
+        color: #fff;
+        font-size: 1.4em;
+        text-align: center;
+        padding: 0.5rem 1rem;
+        width: 75px;
+        height: 30px;
+        display: inline-block;
+        align-self: center;
+        border: none;
+        cursor: pointer;
+      }
     }
   }
 }
