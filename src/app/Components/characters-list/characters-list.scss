@@ -1,16 +1,25 @@
 /* -- characters-list.scss: -- */
 
 .characters-list {
-  .even,
-  .odd {
-    display: block;
-  }
+  app-characters-card {
+    &.first {
+      border-top: 4px solid #b8a45a;
+    }
 
-  .even {
-    background-color: #191313;
-  }
-  .odd {
-    background-color: #2b1818;
+    &.last {
+    }
+
+    &.even,
+    &.odd {
+      display: block;
+    }
+
+    &.even {
+      background-color: #191313;
+    }
+    &.odd {
+      background-color: #2b1818;
+    }
   }
 
   .empty-list {
@@ -18,5 +27,9 @@
     p {
       text-align: center;
     }
+  }
+
+  p {
+    margin-bottom: 5px;
   }
 }

@@ -3,13 +3,25 @@
 <div class="characters-list">
   <h2>Characters:</h2>
 
-  @for (character of characters; track character.id; let even = $even; let odd = $odd) {
+  @for (
+    character of characters;
+    track character.id;
+    let even = $even, odd = $odd, count = $count, first = $first, last = $last
+  ) {
+    @if (first) {
+      <p>There are {{ count }} items found.</p>
+    }
     <app-characters-card
       [character]="character"
       (statEvent)="handleStat($event)"
       [class.even]="even"
       [class.odd]="odd"
+      [class.first]="first"
+      [class.last]="last"
     ></app-characters-card>
+    @if (last) {
+      <p>This is the end of list.</p>
+    }
   } @empty {
     <div class="empty-list">
       <h3>No characters are currently available.</h3>
