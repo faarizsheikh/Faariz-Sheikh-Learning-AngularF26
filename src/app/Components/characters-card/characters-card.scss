@@ -1,24 +1,34 @@
 /* -- characters-card.scss: -- */
 
+// CARD EVEN-ODD STYLING:
+:host(.even) {
+  .card-header h3 {
+    background-color: #110f10;
+  }
+}
+:host(.odd) {
+  .card-header h3 {
+    background-color: #4a1018;
+  }
+}
+
+// CARD STYLING:
 .characters-card {
-  background-color: #141313;
-  color: #fff;
   margin: 15px auto;
-  padding: 15px;
   max-width: 600px;
   border: 2px solid #c1121f;
   border-radius: 5px;
 
   // CARD HEADER STYLING:
   .card-header {
-    background-color: #4a1018;
-    margin-bottom: 15px;
-    padding: 10px;
+    width: 100%;
+    display: block;
 
     h3 {
-      font-size: 2.6rem;
       text-align: center;
-      margin: 0;
+      margin-block: 0 15px;
+      margin-inline: 0;
+      padding: 10px;
     }
 
     img {
@@ -31,27 +41,17 @@
 
   // CARD BODY STYLING:
   .card-body {
+    padding: 15px;
+
     // Paragraphs and blockquote styling:
     blockquote {
       background-color: #110f10;
       color: #b94a3b;
-      font-size: 1.8rem;
-      font-style: italic;
-      text-align: center;
+      margin-top: 0;
       padding: 10px;
-
-      &::before {
-        content: '“';
-      }
-
-      &::after {
-        content: '”';
-      }
     }
 
     p {
-      font-size: 1.8rem;
-
       strong {
         color: #b8a45a;
 
@@ -83,7 +83,7 @@
         &.antagonist,
         &.catalyst,
         &.supporting {
-          color: #fff;
+          color: #e8dddd;
         }
 
         &.protagonist {
@@ -110,12 +110,12 @@
 
     // Status styling:
     .status-container {
-      display: flex;
-      gap: 15px;
-
       p {
+        margin-bottom: 0;
         min-width: 141px;
         display: flex;
+        align-content: center;
+        justify-content: center;
         gap: 10px;
 
         .alive {
@@ -134,16 +134,13 @@
       // Status toggle button styling:
       .toggle-btn {
         background-color: dodgerblue;
-        color: #fff;
-        font-size: 1.4em;
-        text-align: center;
-        padding: 0.5rem 1rem;
-        width: 75px;
-        height: 30px;
-        display: inline-block;
-        align-self: center;
-        border: none;
-        cursor: pointer;
+
+        &:hover {
+          background-color: #54a5f5;
+        }
+        &:active {
+          background-color: dodgerblue;
+        }
       }
     }
   }

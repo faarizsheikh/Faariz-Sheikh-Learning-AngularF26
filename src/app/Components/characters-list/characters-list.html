@@ -3,10 +3,12 @@
 <div class="characters-list">
   <h2>Characters:</h2>
 
-  @for (character of characters; track character.id) {
+  @for (character of characters; track character.id; let even = $even; let odd = $odd) {
     <app-characters-card
       [character]="character"
       (statEvent)="handleStat($event)"
+      [class.even]="even"
+      [class.odd]="odd"
     ></app-characters-card>
   } @empty {
     <div class="empty-list">

@@ -1,6 +1,18 @@
 /* -- characters-list.scss: -- */
 
 .characters-list {
+  .even,
+  .odd {
+    display: block;
+  }
+
+  .even {
+    background-color: #191313;
+  }
+  .odd {
+    background-color: #2b1818;
+  }
+
   .empty-list {
     h3,
     p {
