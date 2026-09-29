@@ -51,7 +51,7 @@ export class CharactersList {
     },
     {
       id: 3,
-      name: 'Pennywise, The Dancing Clown (AKA Deadlights)',
+      name: 'Pennywise (AKA Deadlights)',
       quote:
         "No! I'll take him! I'll take all of you! " +
         "I'll feast on your flesh as I feed on your fear..." +

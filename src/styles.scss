@@ -16,6 +16,10 @@ h1 {
   color: #c1121f;
   font-size: 3.2em;
   text-align: center;
+
+  &:hover {
+    color: #b8a45a;
+  }
 }
 
 h2 {
@@ -25,6 +29,7 @@ h2 {
 
 h3 {
   color: #e8dddd;
+  font-size: 2.6em;
 }
 
 p,
@@ -39,4 +44,26 @@ blockquote {
   font-style: italic;
   text-align: center;
   padding: 10px;
+
+  &::before {
+    content: '“';
+  }
+
+  &::after {
+    content: '”';
+  }
+}
+
+button {
+  color: #e8dddd;
+  font-size: 1.4em;
+  padding: 0.5rem 1rem;
+  width: 75px;
+  height: 30px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  justify-self: center;
+  border: none;
+  cursor: pointer;
 }
