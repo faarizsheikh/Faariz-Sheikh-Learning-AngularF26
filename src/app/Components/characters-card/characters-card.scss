@@ -1,13 +1,38 @@
 /* -- characters-card.scss: -- */
 
 // CARD EVEN-ODD STYLING:
-:host(.even) {
-  .card-header h3 {
+:host {
+  &.first.even .card-header::before,
+  &.last.even .card-header::before {
+    background-color: #4a1018;
+  }
+
+  &.first.odd .card-header::before,
+  &.last.odd .card-header::before {
     background-color: #110f10;
   }
-}
-:host(.odd) {
-  .card-header h3 {
+
+  &.first .card-header::before,
+  &.last .card-header::before {
+    color: gold;
+    font-size: 5em;
+    position: absolute;
+    z-index: 0;
+  }
+
+  &.first .card-header::before {
+    content: 'First';
+  }
+
+  &.last .card-header::before {
+    content: 'Last';
+  }
+
+  &.even .card-header h3 {
+    background-color: #110f10;
+  }
+
+  &.odd .card-header h3 {
     background-color: #4a1018;
   }
 }
