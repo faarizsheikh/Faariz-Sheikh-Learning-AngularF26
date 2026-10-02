@@ -14,6 +14,7 @@ import { CharactersService } from '../../Shared/Services/characters-service';
 export class CharactersList {
   private charactersService = inject(CharactersService);
   characters = this.charactersService.charactersList;
+  aliveCharacters = this.charactersService.aliveCharacters;
 
   // Function to console a message upon toggle:
   handleStat(event: statEvent): void {

@@ -9,7 +9,10 @@
     let even = $even, odd = $odd, count = $count, first = $first, last = $last
   ) {
     @if (first) {
-      <p>There are {{ count }} items found.</p>
+      <div class="count-container">
+        <p class="characters-count">There are {{ count }} items found.</p>
+        <p class="alive-count">Alive Characters: {{ aliveCharacters().length }}</p>
+      </div>
     }
     <app-characters-card
       [character]="character"

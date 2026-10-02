@@ -1,6 +1,16 @@
 /* -- characters-list.scss: -- */
 
 .characters-list {
+  .count-container {
+    display: flex;
+    justify-content: space-between;
+
+    .characters-count,
+    .alive-count {
+      color: #e8dddd;
+    }
+  }
+
   app-characters-card {
     &.first {
       border-top: 4px solid #b8a45a;

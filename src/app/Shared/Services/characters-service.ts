@@ -1,6 +1,6 @@
 // characters-service.ts:
 
-import { Service, signal } from '@angular/core';
+import { Service, computed, effect, signal } from '@angular/core';
 import { Characters } from '../Models/characters-data';
 
 @Service()
@@ -182,4 +182,18 @@ export class CharactersService {
   ]);
 
   readonly charactersList = this.characters.asReadonly();
+
+  readonly aliveCharacters = computed(() =>
+    this.characters().filter((character) => character.status === true),
+  );
+
+  constructor() {
+    effect(() => {
+      console.log(`Character count: ${this.characters().length}`);
+    });
+  }
+
+  addCharacter(character: Characters): void {
+    this.characters.update((list) => [...list, character]);
+  }
 }
