@@ -181,19 +181,51 @@ export class CharactersService {
     },
   ]);
 
-  readonly charactersList = this.characters.asReadonly();
-
-  readonly aliveCharacters = computed(() =>
-    this.characters().filter((character) => character.status === true),
-  );
-
+  // Effect reacts to the character count change:
   constructor() {
     effect(() => {
       console.log(`Character count: ${this.characters().length}`);
     });
   }
 
+  // Read-only version of the data array signal for components to consume:
+  readonly charactersList = this.characters.asReadonly();
+
+  // Creates a filter array list only containing alive characters:
+  readonly aliveCharacters = computed(() =>
+    this.characters().filter((character) => character.status === true),
+  );
+
+  // Count for number of alive characters:
+  readonly aliveCharacterCount = computed(() => this.aliveCharacters().length);
+
+  // Method to add a new character and include it in a new array list containing both old and new ones:
   addCharacter(character: Characters): void {
     this.characters.update((list) => [...list, character]);
+  }
+
+  // Method to create a new array list and exclude the removed character:
+  removeCharacter(id: number): void {
+    this.characters.update((list) => list.filter((character) => character.id !== id));
+  }
+
+  // Method to create a new array list and contain the updated status:
+  toggleStat(id: number, status: boolean | undefined): void {
+    this.characters.update((list) => {
+      const index = list.findIndex((character) => character.id === id);
+
+      if (index === -1) return list;
+
+      // Creates a duplicate array of the data array:
+      const updated = [...list];
+
+      // Create a new object of the new array containing the updated status:
+      updated[index] = {
+        ...updated[index],
+        status,
+      };
+
+      return updated;
+    });
   }
 }

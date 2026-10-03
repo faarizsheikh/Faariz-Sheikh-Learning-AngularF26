@@ -11,16 +11,17 @@
     @if (first) {
       <div class="count-container">
         <p class="characters-count">There are {{ count }} items found.</p>
-        <p class="alive-count">Alive Characters: {{ aliveCharacters().length }}</p>
+        <p class="alive-count">Alive Characters: {{ aliveCharacterCount() }}</p>
       </div>
     }
     <app-characters-card
       [character]="character"
-      (statEvent)="handleStat($event)"
       [class.even]="even"
-      [class.odd]="odd"
       [class.first]="first"
       [class.last]="last"
+      [class.odd]="odd"
+      (removeEvent)="handleRemove($event)"
+      (statEvent)="handleStat($event)"
     ></app-characters-card>
 
     @if (last) {

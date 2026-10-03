@@ -3,7 +3,8 @@
 import { NgOptimizedImage } from '@angular/common';
 import { Component, input, output } from '@angular/core';
 import { Characters } from '../../Shared/Models/characters-data';
-import { statEvent } from '../../Shared/Models/events-data';
+import { removeEventData } from '../../Shared/Models/remove-event-data';
+import { statEvent } from '../../Shared/Models/status-event-data';
 
 @Component({
   imports: [NgOptimizedImage],
@@ -13,9 +14,21 @@ import { statEvent } from '../../Shared/Models/events-data';
 })
 export class CharactersCard {
   character = input.required<Characters>();
+  removeEvent = output<removeEventData>();
   statEvent = output<statEvent>();
 
-  // Toggle button to switch between status:
+  // Toggle button to emit the requested remove:
+  protected removeCharacter(): void {
+    const character = this.character();
+
+    // Sending information to the parent component (Characters-List):
+    this.removeEvent.emit({
+      id: character.id,
+      name: character.name,
+    });
+  }
+
+  // Toggle button to emit the status change:
   protected toggleStat(): void {
     const character = this.character();
 
@@ -23,11 +36,8 @@ export class CharactersCard {
     const oldStat =
       character.status === undefined ? 'unknown' : character.status ? 'alive' : 'dead';
 
-    // Setting a new status based on old status:
+    // Storing new status as a string based on old status:
     const newStat = oldStat === 'unknown' ? 'alive' : oldStat === 'alive' ? 'dead' : 'unknown';
-
-    // Updating property's value by converting back to boolean:
-    character.status = newStat === 'alive' ? true : newStat === 'dead' ? false : undefined;
 
     // Sending information to the parent component (Characters-List):
     this.statEvent.emit({
