@@ -34,10 +34,10 @@ export class CharactersCard {
 
     // Storing old status as a string based on boolean value:
     const oldStat =
-      character.status === undefined ? 'unknown' : character.status ? 'alive' : 'dead';
+      character.status === undefined ? 'Unknown' : character.status ? 'Alive' : 'Dead';
 
     // Storing new status as a string based on old status:
-    const newStat = oldStat === 'unknown' ? 'alive' : oldStat === 'alive' ? 'dead' : 'unknown';
+    const newStat = oldStat === 'Unknown' ? 'Alive' : oldStat === 'Alive' ? 'Dead' : 'Unknown';
 
     // Sending information to the parent component (Characters-List):
     this.statEvent.emit({

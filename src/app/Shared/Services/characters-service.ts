@@ -39,7 +39,7 @@ export class CharactersService {
       description:
         'George Elmer Denbrough is a sweet, young boy, ' +
         'whose death causes deep trauma and survivor’s guilt for Bill, ' +
-        "driving the Losers' Club to hunt the evil entity",
+        "driving the Losers' Club to hunt the evil entity.",
       imageLink: '../../Assets/char-imgs/george-den.png',
     },
     {

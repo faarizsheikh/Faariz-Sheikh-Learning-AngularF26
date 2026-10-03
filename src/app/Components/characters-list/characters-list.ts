@@ -14,7 +14,6 @@ import { removeEventData } from '../../Shared/Models/remove-event-data';
 })
 export class CharactersList {
   private charactersService = inject(CharactersService);
-  aliveCharacters = this.charactersService.aliveCharacters;
   aliveCharacterCount = this.charactersService.aliveCharacterCount;
   characters = this.charactersService.charactersList;
 
@@ -32,7 +31,7 @@ export class CharactersList {
   handleStat(event: statEvent): void {
     // Updating property's value by converting back to boolean:
     const newStatus =
-      event.newStat === 'alive' ? true : event.newStat === 'dead' ? false : undefined;
+      event.newStat === 'Alive' ? true : event.newStat === 'Dead' ? false : undefined;
 
     this.charactersService.toggleStat(event.id, newStatus);
 
