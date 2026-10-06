@@ -212,6 +212,7 @@ export class CharactersService {
   // Method to create a new array list and contain the updated status:
   toggleStat(id: number, status: boolean | undefined): void {
     this.characters.update((list) => {
+      // Searches the array:
       const index = list.findIndex((character) => character.id === id);
 
       if (index === -1) return list;
@@ -219,11 +220,11 @@ export class CharactersService {
       // Creates a duplicate array of the data array:
       const updated = [...list];
 
-      // Create a new object of the new array containing the updated status:
+      // Create a new object of the new array containing the updated status - To avoid modifying the existing object:
       updated[index] = {
         ...updated[index],
         status,
-      };
+      }; // Avoids, mutation, btw.
 
       return updated;
     });
