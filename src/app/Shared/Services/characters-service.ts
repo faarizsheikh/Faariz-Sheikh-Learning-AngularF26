@@ -1,4 +1,4 @@
-// characters-service.ts:
+// CHARACTERS SERVICE (characters-service.ts):
 
 import { Service, computed, effect, signal } from '@angular/core';
 import { Characters } from '../Models/characters-data';

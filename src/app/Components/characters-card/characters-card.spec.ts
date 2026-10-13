@@ -1,4 +1,4 @@
-// characters-card.spec.ts:
+// CHARACTERS CARD COMPONENT UNIT TESTING (characters-card.component.spec.ts):
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CharactersCard } from './characters-card';

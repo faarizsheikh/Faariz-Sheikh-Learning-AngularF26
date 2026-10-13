@@ -1,9 +1,9 @@
-// characters-card.ts:
+// CHARACTERS CARD COMPONENT CLASS (characters-card.component.ts):
 
 import { NgOptimizedImage } from '@angular/common';
 import { Component, input, output } from '@angular/core';
 import { Characters } from '../../Shared/Models/characters-data';
-import { removeEventData } from '../../Shared/Models/remove-event-data';
+import { removeEvent } from '../../Shared/Models/remove-event-data';
 import { statEvent } from '../../Shared/Models/status-event-data';
 
 @Component({
@@ -14,7 +14,7 @@ import { statEvent } from '../../Shared/Models/status-event-data';
 })
 export class CharactersCard {
   character = input.required<Characters>();
-  removeEvent = output<removeEventData>();
+  removeEvent = output<removeEvent>();
   statEvent = output<statEvent>();
 
   // Toggle button to emit the requested remove:
@@ -42,8 +42,8 @@ export class CharactersCard {
     // Sending information to the parent component (Characters-List):
     this.statEvent.emit({
       id: character.id,
-      newStat,
       oldStat,
+      newStat,
     });
   }
 }

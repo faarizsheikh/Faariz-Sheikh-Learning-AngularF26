@@ -1,3 +1,5 @@
+// APPLICATION CONFIG INTERFACE (app-config.ts):
+
 import { InjectionToken } from '@angular/core';
 
 export interface AppConfig {

@@ -1,4 +1,4 @@
-// characters-data.ts:
+// CHARACTERS DATA INTERFACE (characters-data.ts):
 
 export interface ExtraInfo {
   status?: boolean;

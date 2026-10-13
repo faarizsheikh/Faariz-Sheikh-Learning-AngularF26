@@ -1,4 +1,4 @@
-// characters-service.services.ts:
+// CHARACTERS SERVICE UNIT TESTS (characters-service.spec.ts):
 
 import { TestBed } from '@angular/core/testing';
 import { CharactersService } from './characters-service';

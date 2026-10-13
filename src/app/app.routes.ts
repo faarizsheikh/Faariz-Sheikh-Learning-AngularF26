@@ -1,4 +1,4 @@
-// app.routes.ts:
+// GLOBAL ROUTING CONFIGURATION (app.routes.ts):
 
 import { Routes } from '@angular/router';
 

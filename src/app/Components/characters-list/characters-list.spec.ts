@@ -1,4 +1,4 @@
-// characters-list.spec.ts:
+// CHARACTERS LIST COMPONENT UNIT TESTING (characters-list.spec.ts):
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CharactersList } from './characters-list';

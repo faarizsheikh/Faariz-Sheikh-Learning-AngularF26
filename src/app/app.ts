@@ -1,4 +1,4 @@
-// app.component.ts:
+// ROOT COMPONENT DEFINITION (app.ts):
 
 import { Component } from '@angular/core';
 import { CharactersList } from './Components/characters-list/characters-list';

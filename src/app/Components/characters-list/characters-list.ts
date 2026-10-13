@@ -1,10 +1,10 @@
-// characters-list.ts:
+/* -- CHARACTERS LIST COMPONENT CLASS (characters-list.component.ts): -- */
 
 import { Component, inject } from '@angular/core';
 import { CharactersCard } from '../characters-card/characters-card';
+import { removeEvent } from '../../Shared/Models/remove-event-data';
 import { statEvent } from '../../Shared/Models/status-event-data';
 import { CharactersService } from '../../Shared/Services/characters-service';
-import { removeEventData } from '../../Shared/Models/remove-event-data';
 
 @Component({
   imports: [CharactersCard],
@@ -18,7 +18,7 @@ export class CharactersList {
   characters = this.charactersService.charactersList;
 
   // Function to remove an item in the list and console a message about it:
-  handleRemove(event: removeEventData): void {
+  handleRemove(event: removeEvent): void {
     this.charactersService.removeCharacter(event.id);
 
     console.log(
