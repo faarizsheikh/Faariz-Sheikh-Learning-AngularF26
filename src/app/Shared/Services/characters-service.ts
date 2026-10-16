@@ -1,10 +1,17 @@
 // CHARACTERS SERVICE (characters-service.ts):
 
-import { Service, computed, effect, signal } from '@angular/core';
+import { Service, computed, effect, inject, signal } from '@angular/core';
+import { APP_CONFIG } from '../Config/app-config';
 import { Characters } from '../Models/characters-data';
 
 @Service()
 export class CharactersService {
+  // Asks Angular's injector for the value registered in app.config.ts.
+  private config = inject(APP_CONFIG);
+
+  // Reads the actual URL from that injected configuration.
+  readonly apiBaseUrl = this.config.apiBaseUrl;
+
   private characters = signal<Characters[]>([
     {
       id: 1,
@@ -25,7 +32,7 @@ export class CharactersService {
         "Driven by the survivor's guilt, " +
         'he seeks revenge on Pennywise, ' +
         'The Dancing Clown for killing his little brother, George.',
-      imageLink: '../../Assets/char-imgs/bill-den.png',
+      imageLink: '../../Assets/character-images/bill-den.png',
     },
     {
       id: 2,
@@ -40,7 +47,7 @@ export class CharactersService {
         'George Elmer Denbrough is a sweet, young boy, ' +
         'whose death causes deep trauma and survivor’s guilt for Bill, ' +
         "driving the Losers' Club to hunt the evil entity.",
-      imageLink: '../../Assets/char-imgs/george-den.png',
+      imageLink: '../../Assets/character-images/george-den.png',
     },
     {
       id: 3,
@@ -62,7 +69,7 @@ export class CharactersService {
         'preys on the fears of children in ' +
         'Derry, Maine, every 27 years. ' +
         'He is responsible for the death of George Elmer Denbrough.',
-      imageLink: '../../Assets/char-imgs/pw-clown.png',
+      imageLink: '../../Assets/character-images/pw-clown.png',
     },
     {
       id: 4,
@@ -85,7 +92,7 @@ export class CharactersService {
         'Due to his non-stop jokes, sarcasm, and impressions ' +
         'to deal with fear and trauma, ' +
         'He is nicknamed as “Trashmouth.”',
-      imageLink: '../../Assets/char-imgs/rich-toz.png',
+      imageLink: '../../Assets/character-images/rich-toz.png',
     },
     {
       id: 5,
@@ -100,7 +107,7 @@ export class CharactersService {
         'Stanley Uris is a cautious, methodical ' +
         "member of the Losers' Club who is the son of a local rabbi. " +
         'He is the most logical thinker in the group.',
-      imageLink: '../../Assets/char-imgs/stan-ur.png',
+      imageLink: '../../Assets/character-images/stan-ur.png',
     },
     {
       id: 6,
@@ -118,7 +125,7 @@ export class CharactersService {
         'He is dominated by his fiercely ' +
         'overprotective mother, Sonia, ' +
         'who convinces him he is sickly and asthmatic.',
-      imageLink: '../../Assets/char-imgs/eds-k.png',
+      imageLink: '../../Assets/character-images/eds-k.png',
     },
     {
       id: 7,
@@ -140,7 +147,7 @@ export class CharactersService {
         'independent adolescent. She carries heavy emotional ' +
         'pain from severe bullying at school ' +
         'and abuse at home by her father, Alvin Marsh.',
-      imageLink: '../../Assets/char-imgs/bev-marsh.png',
+      imageLink: '../../Assets/character-images/bev-marsh.png',
     },
     {
       id: 8,
@@ -159,7 +166,7 @@ export class CharactersService {
         'Michael Hanlon is a resilient, isolated ' +
         'African-American teenager ' +
         "who becomes the final core member of the Losers' Club.",
-      imageLink: '../../Assets/char-imgs/mike-han.png',
+      imageLink: '../../Assets/character-images/mike-han.png',
     },
     {
       id: 9,
@@ -177,7 +184,7 @@ export class CharactersService {
         'Benjamin Hanscom is a new kid ' +
         'who is overweight, soft-spoken, and deeply intelligent. ' +
         'He may be shy but he is also a bookworm.',
-      imageLink: '../../Assets/char-imgs/ben-hc.png',
+      imageLink: '../../Assets/character-images/ben-hc.png',
     },
   ]);
 

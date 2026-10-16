@@ -16,6 +16,7 @@ export class CharactersList {
   private charactersService = inject(CharactersService);
   aliveCharacterCount = this.charactersService.aliveCharacterCount;
   characters = this.charactersService.charactersList;
+  dataSource = this.charactersService.apiBaseUrl;
 
   // Function to remove an item in the list and console a message about it:
   handleRemove(event: removeEvent): void {

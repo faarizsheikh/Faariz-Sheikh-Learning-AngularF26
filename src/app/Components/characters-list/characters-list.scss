@@ -1,6 +1,10 @@
 /* -- CHARACTERS LIST COMPONENT STYLING (characters-list.component.scss): -- */
 
 .characters-list {
+  .data-source {
+    color: #e8dddd;
+  }
+
   .count-container {
     display: flex;
     justify-content: space-between;
