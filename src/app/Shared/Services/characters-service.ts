@@ -1,15 +1,17 @@
 // CHARACTERS SERVICE (characters-service.ts):
 
-import { Service, computed, effect, inject, signal } from '@angular/core';
+import { Injectable, computed, effect, inject, signal } from '@angular/core';
 import { APP_CONFIG } from '../Config/app-config';
 import { Characters } from '../Models/characters-data';
 
-@Service()
+@Injectable({
+  providedIn: 'root',
+})
 export class CharactersService {
-  // Asks Angular's injector for the value registered in app.config.ts.
+  // Asks Angular's injector for the value registered in app.config.ts:
   private config = inject(APP_CONFIG);
 
-  // Reads the actual URL from that injected configuration.
+  // Reads the actual URL from that injected configuration:
   readonly apiBaseUrl = this.config.apiBaseUrl;
 
   private characters = signal<Characters[]>([
@@ -231,7 +233,7 @@ export class CharactersService {
       updated[index] = {
         ...updated[index],
         status,
-      }; // Avoids, mutation, btw.
+      }; // Avoids, mutation.
 
       return updated;
     });
