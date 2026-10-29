@@ -21,7 +21,9 @@ export const appConfig: ApplicationConfig = {
     },
     {
       provide: CharacterService,
-      useClass: MockCharacterService, // Removing this will switch back to real data.
+
+      // Removing this will switch back to real data.
+      // useClass: MockCharacterService,
     },
   ],
 };
