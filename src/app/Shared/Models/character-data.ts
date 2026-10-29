@@ -1,10 +1,10 @@
-// CHARACTERS DATA INTERFACE (characters-data.ts):
+// CHARACTER DATA INTERFACE (character-data.ts):
 
 export interface ExtraInfo {
   status?: boolean;
 }
 
-export interface Characters extends ExtraInfo {
+export interface Character extends ExtraInfo {
   id: number;
   name: string;
   imageLink: string;

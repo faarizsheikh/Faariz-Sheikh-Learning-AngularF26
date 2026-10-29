@@ -1,19 +1,19 @@
-// CHARACTERS CARD COMPONENT CLASS (characters-card.component.ts):
+// CHARACTER CARD COMPONENT CLASS (character-card.component.ts):
 
 import { NgOptimizedImage } from '@angular/common';
 import { Component, input, output } from '@angular/core';
-import { Characters } from '../../Shared/Models/characters-data';
+import { Character } from '../../Shared/Models/character-data';
 import { removeEvent } from '../../Shared/Models/remove-event-data';
 import { statEvent } from '../../Shared/Models/status-event-data';
 
 @Component({
   imports: [NgOptimizedImage],
-  selector: 'app-characters-card',
-  styleUrl: './characters-card.scss',
-  templateUrl: './characters-card.html',
+  selector: 'app-character-card',
+  styleUrl: './character-card.scss',
+  templateUrl: './character-card.html',
 })
-export class CharactersCard {
-  character = input.required<Characters>();
+export class CharacterCard {
+  character = input.required<Character>();
   removeEvent = output<removeEvent>();
   statEvent = output<statEvent>();
 

@@ -1,19 +1,19 @@
-/* -- CHARACTERS LIST COMPONENT CLASS (characters-list.component.ts): -- */
+/* -- CHARACTER LIST COMPONENT CLASS (character-list.component.ts): -- */
 
 import { Component, inject } from '@angular/core';
-import { CharactersCard } from '../characters-card/characters-card';
+import { CharacterCard } from '../character-card/character-card';
 import { removeEvent } from '../../Shared/Models/remove-event-data';
 import { statEvent } from '../../Shared/Models/status-event-data';
-import { CharactersService } from '../../Shared/Services/characters-service';
+import { CharacterService } from '../../Shared/Services/character-service';
 
 @Component({
-  imports: [CharactersCard],
-  selector: 'app-characters-list',
-  styleUrl: './characters-list.scss',
-  templateUrl: './characters-list.html',
+  imports: [CharacterCard],
+  selector: 'app-character-list',
+  styleUrl: './character-list.scss',
+  templateUrl: './character-list.html',
 })
-export class CharactersList {
-  private charactersService = inject(CharactersService);
+export class CharacterList {
+  private charactersService = inject(CharacterService);
   aliveCharacterCount = this.charactersService.aliveCharacterCount;
   characters = this.charactersService.charactersList;
   dataSource = this.charactersService.apiBaseUrl;

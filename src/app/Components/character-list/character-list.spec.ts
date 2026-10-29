@@ -1,18 +1,18 @@
-// CHARACTERS LIST COMPONENT UNIT TESTING (characters-list.spec.ts):
+// CHARACTER LIST COMPONENT UNIT TESTING (character-list.spec.ts):
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CharactersList } from './characters-list';
+import { CharacterList } from './character-list';
 
-describe('CharactersList', () => {
-  let component: CharactersList;
-  let fixture: ComponentFixture<CharactersList>;
+describe('CharacterList', () => {
+  let component: CharacterList;
+  let fixture: ComponentFixture<CharacterList>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CharactersList],
+      imports: [CharacterList],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CharactersList);
+    fixture = TestBed.createComponent(CharacterList);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

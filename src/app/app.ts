@@ -1,10 +1,10 @@
 // ROOT COMPONENT DEFINITION (app.ts):
 
 import { Component } from '@angular/core';
-import { CharactersList } from './Components/characters-list/characters-list';
+import { CharacterList } from './Components/character-list/character-list';
 
 @Component({
-  imports: [CharactersList],
+  imports: [CharacterList],
   selector: 'app-root',
   styleUrl: './app.scss',
   templateUrl: './app.html',

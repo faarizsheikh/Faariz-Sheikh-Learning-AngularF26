@@ -1,20 +1,20 @@
-// CHARACTERS SERVICE (characters-service.ts):
+// CHARACTER SERVICE (character-service.ts):
 
 import { Injectable, computed, effect, inject, signal } from '@angular/core';
 import { APP_CONFIG } from '../Config/app-config';
-import { Characters } from '../Models/characters-data';
+import { Character } from '../Models/character-data';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CharactersService {
+export class CharacterService {
   // Asks Angular's injector for the value registered in app.config.ts:
   private config = inject(APP_CONFIG);
 
   // Reads the actual URL from that injected configuration:
   readonly apiBaseUrl = this.config.apiBaseUrl;
 
-  private characters = signal<Characters[]>([
+  private characters = signal<Character[]>([
     {
       id: 1,
       name: 'Billy “Bill” Denbrough',
@@ -209,7 +209,7 @@ export class CharactersService {
   readonly aliveCharacterCount = computed(() => this.aliveCharacters().length);
 
   // Method to add a new character and include it in a new array list containing both old and new ones:
-  addCharacter(character: Characters): void {
+  addCharacter(character: Character): void {
     this.characters.update((list) => [...list, character]);
   }
 

@@ -1,6 +1,6 @@
-<!-- CHARACTERS LIST COMPONENT TEMPLATE (characters-list.component.html): -->
+<!-- CHARACTER LIST COMPONENT TEMPLATE (character-list.component.html): -->
 
-<div class="characters-list">
+<div class="character-list">
   <h2>Characters:</h2>
 
   <p class="data-source">
@@ -15,11 +15,11 @@
   ) {
     @if (first) {
       <div class="count-container">
-        <p class="characters-count">There are {{ count }} items found.</p>
+        <p class="character-count">There are {{ count }} items found.</p>
         <p class="alive-count">Alive Characters: {{ aliveCharacterCount() }}</p>
       </div>
     }
-    <app-characters-card
+    <app-character-card
       [character]="character"
       [class.even]="even"
       [class.first]="first"
@@ -27,7 +27,7 @@
       [class.odd]="odd"
       (removeEvent)="handleRemove($event)"
       (statEvent)="handleStat($event)"
-    ></app-characters-card>
+    ></app-character-card>
 
     @if (last) {
       <p>This is the end of list.</p>

@@ -1,13 +1,13 @@
-// MOCK CHARACTERS SERVICE (mock-characters-service.ts):
+// MOCK CHARACTERS SERVICE (mock-character-service.ts):
 
 import { Injectable, computed, signal } from '@angular/core';
-import { Characters } from '../Models/characters-data';
+import { Character } from '../Models/character-data';
 
 @Injectable({
   providedIn: 'root',
 })
-export class MockCharactersService {
-  private characters = signal<Characters[]>([
+export class MockCharacterService {
+  private characters = signal<Character[]>([
     {
       id: 101,
       name: 'MOCK CHARACTER ONE',
@@ -43,7 +43,7 @@ export class MockCharactersService {
 
   readonly aliveCharacterCount = computed(() => this.aliveCharacters().length);
 
-  addCharacter(character: Characters): void {
+  addCharacter(character: Character): void {
     this.characters.update((list) => [...list, character]);
   }
 
