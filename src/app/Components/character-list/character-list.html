@@ -4,8 +4,7 @@
   <h2>Characters:</h2>
 
   <p class="data-source">
-    <i>Data source: {{ dataSource }}</i
-    >.
+    <i>Data source: {{ dataSource }}.</i>
   </p>
 
   @for (
@@ -18,15 +17,18 @@
         <p class="character-count">There are {{ count }} items found.</p>
         <p class="alive-count">Alive Characters: {{ aliveCharacterCount() }}</p>
       </div>
+      <div class="separator"></div>
+      <button class="coming-soon add-btn">Coming Soon</button>
     }
     <app-character-card
       [character]="character"
       [class.even]="even"
       [class.first]="first"
       [class.last]="last"
+      [isFirst]="first"
+      [isLast]="last"
       [class.odd]="odd"
       (removeEvent)="handleRemove($event)"
-      (statEvent)="handleStat($event)"
     ></app-character-card>
 
     @if (last) {
@@ -35,6 +37,7 @@
   } @empty {
     <div class="empty-list">
       <h3>No characters are currently available.</h3>
+
       <p>Please add at least one character to the list.</p>
       <p>(The ability to add characters is coming soon.)</p>
     </div>

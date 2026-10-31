@@ -1,11 +1,13 @@
 /* -- GLOBAL STYLING (styles.scss): -- */
 
+// ROOT / HTML STYLING:
 :root {
   background-color: #000;
   font-family: Roboto, sans-serif;
   font-size: 62.5%; /* 62.5% of 16px = 10px */
 }
 
+// HEADING STYLING:
 h1,
 h2,
 h3 {
@@ -30,8 +32,14 @@ h2 {
 h3 {
   color: #e8dddd;
   font-size: 2.6em;
+
+  .name {
+    padding: 10px;
+    margin: 0;
+  }
 }
 
+// TEXT & LINK STYLING:
 p,
 a,
 blockquote {
@@ -40,6 +48,24 @@ blockquote {
   line-height: 1.75;
 }
 
+// PARAGRAPH STYLING:
+p {
+  strong {
+    color: #b8a45a;
+
+    &:not(.character-description) {
+      margin-right: 5px;
+    }
+  }
+
+  // Description Paragraph Styling:
+  &.character-description > strong {
+    display: block;
+    text-align: center;
+  }
+}
+
+// BLOCKQUOTE STYLING:
 blockquote {
   font-style: italic;
   text-align: center;
@@ -54,9 +80,10 @@ blockquote {
   }
 }
 
+// BUTTON STYLING:
 button {
   color: #e8dddd;
-  font-size: 1.4em;
+  font-size: 1.6em;
   padding: 1.5rem 1rem;
   width: 75px;
   height: 30px;
@@ -66,4 +93,133 @@ button {
   justify-self: center;
   border: none;
   cursor: pointer;
+
+  // Add Button Styling:
+  &.add-btn {
+    background-color: #1e90ff;
+    margin-block: 15px 35px;
+    justify-self: left;
+
+    &:hover {
+      background-color: #54a5f5;
+    }
+  }
+
+  // View Button Styling:
+  &.view-btn {
+    background-color: #0caa83;
+
+    &:hover {
+      background-color: #8caa83;
+    }
+  }
+
+  // Edit Button Styling:
+  &.edit-btn {
+    background-color: #c8a45a;
+
+    &:hover {
+      background-color: #b8a45a;
+    }
+  }
+
+  // Delete Button Styling:
+  &.remove-btn {
+    background-color: #8b0000;
+
+    &:hover {
+      background-color: #ff0000;
+    }
+  }
+
+  // Back Button Styling:
+  &.back-btn {
+    background-color: #0caa83;
+
+    &:hover {
+      background-color: #8caa83;
+    }
+  }
+
+  // Status Toggle Button Styling:
+  &.toggle-btn {
+    background-color: #1e90ff;
+
+    &:hover {
+      background-color: #54a5f5;
+    }
+  }
+
+  // Coming Soon Button Styling - ALWAYS AT THE END OF BUTTON STYLING TO OVERRIDE REAL STYLING:
+  &.coming-soon {
+    background-color: #444;
+    width: 120px;
+
+    &:hover {
+      background-color: #444;
+    }
+  }
+
+  // Interaction States:
+  &:focus-visible {
+    background-color: #483d8b;
+  }
+
+  &:active {
+    background-color: #2f4f4f;
+  }
+}
+
+// Badge Styling:
+.badge {
+  font-size: 1.4rem;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 10px;
+
+  &.protagonist,
+  &.co-protagonist {
+    color: #000;
+  }
+
+  &.antagonist,
+  &.catalyst,
+  &.supporting {
+    color: #e8dddd;
+  }
+
+  &.protagonist {
+    background-color: #b8a45a;
+  }
+
+  &.co-protagonist {
+    background-color: #8caa83;
+  }
+
+  &.antagonist {
+    background-color: #c1121f;
+  }
+
+  &.catalyst {
+    background-color: #b94a3b;
+  }
+
+  &.supporting {
+    background-color: #555;
+  }
+}
+
+// IMAGE STYLING:
+img {
+  width: 100%;
+  height: auto;
+}
+
+// CARD FOOTER STYLING:
+.card-footer {
+  background-color: #110f10;
+  padding-block: 5px;
+  display: flex;
+  justify-content: center;
+  column-gap: 15px;
 }

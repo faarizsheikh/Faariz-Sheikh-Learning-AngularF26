@@ -2,26 +2,14 @@
 
 <div class="character-card">
   <div class="card-header">
-    <h3>{{ character().name }}</h3>
-    <img
-      [alt]="character().name"
-      [ngSrc]="character().imageLink"
-      [title]="character().name"
-      class="game-image"
-      width="480"
-      height="485"
-      priority="true"
-    />
-  </div>
+    @if (isFirst() || isLast()) {
+      <p [class]="'count-lbl ' + (isFirst() ? 'first-lbl' : 'last-lbl')">
+        {{ character().id }}
+      </p>
+    }
+    <h3 class="name">{{ character().name }}</h3>
 
-  <div class="card-body">
-    <blockquote>{{ character().quote }}</blockquote>
-
-    <p><strong>Age:</strong>{{ character().age }}</p>
-    <p><strong>Gender:</strong>{{ character().gender }}</p>
-    <p><strong>Played by:</strong>{{ character().played_by }}</p>
-
-    <div class="badge-container">
+    <p class="badge-container">
       @switch (character().character_type) {
         @case ('Protagonist') {
           <span class="badge protagonist">Protagonist</span>
@@ -39,25 +27,26 @@
           <span class="badge supporting">Supporting Character</span>
         }
       }
-    </div>
+    </p>
+  </div>
 
-    <div class="status-container">
-      <p>
-        <strong>Status:</strong>
-        @if (character().status !== undefined) {
-          @if (character().status) {
-            <span class="status alive">Alive</span>
-          } @else {
-            <span class="status dead">Dead</span>
-          }
-        } @else {
-          <span class="status unknown">Unknown</span>
-        }
-      </p>
-      <button class="toggle-btn" (click)="toggleStat()">Update</button>
-    </div>
+  <div class="card-body">
+    <img
+      [alt]="character().name"
+      [ngSrc]="character().imageLink"
+      [title]="character().name"
+      class="game-image"
+      width="480"
+      height="485"
+      priority="true"
+    />
 
-    <p><strong>Description:</strong>{{ character().description }}</p>
+    <p><strong>Played by:</strong>{{ character().played_by }}</p>
+  </div>
+
+  <div class="card-footer">
     <button class="remove-btn" (click)="removeCharacter()">Remove</button>
+    <button class="view-btn" [routerLink]="['/characters', character().id, 'view']">View</button>
+    <button class="coming-soon edit-btn">Coming Soon</button>
   </div>
 </div>

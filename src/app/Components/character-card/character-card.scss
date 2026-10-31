@@ -2,42 +2,25 @@
 
 // CARD EVEN-ODD STYLING:
 :host {
-  &.first.even .card-header::before,
-  &.last.even .card-header::before {
+  &.first.even .card-header > .count-lbl,
+  &.last.even .card-header > .count-lbl {
     background-color: #4a1018;
   }
 
-  &.first.odd .card-header::before,
-  &.last.odd .card-header::before {
+  &.last.odd .card-header > .count-lbl {
     background-color: #110f10;
   }
 
-  &.first .card-header::before,
-  &.last .card-header::before {
-    color: gold;
-    font-size: 5em;
-    position: absolute;
-    z-index: 0;
-  }
-
-  &.first .card-header::before {
-    content: 'First';
-  }
-
-  &.last .card-header::before {
-    content: 'Last';
-  }
-
-  &.even .card-header h3 {
+  &.even .card-header {
     background-color: #110f10;
   }
 
-  &.odd .card-header h3 {
+  &.odd .card-header {
     background-color: #4a1018;
   }
 }
 
-// CARD STYLING:
+// CHARACTER CARD STYLING:
 .character-card {
   margin: 15px auto;
   max-width: 600px;
@@ -46,132 +29,50 @@
 
   // CARD HEADER STYLING:
   .card-header {
-    width: 100%;
-    display: block;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto 2fr;
 
-    h3 {
-      text-align: center;
-      margin-block: 0 15px;
-      margin-inline: 0;
-      padding: 10px;
+    .count-lbl,
+    .badge {
+      font-weight: bold;
     }
 
-    img {
-      width: 480px;
-      height: 485px;
+    .count-lbl {
+      position: absolute;
+      top: -25px;
+      left: -15px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
       display: flex;
-      justify-self: center;
+      align-items: center;
+      font-weight: bold;
+      justify-content: center;
+      color: gold;
+      z-index: 1;
+    }
+
+    h3 {
+      grid-column: 2;
+    }
+
+    // Badge Styling:
+    .badge {
+      display: flex;
+      grid-column: 3;
+      justify-self: end;
+      align-content: center;
+      justify-content: center;
+      position: static;
+      margin-right: 10px;
     }
   }
 
   // CARD BODY STYLING:
   .card-body {
-    padding: 15px;
-
-    // Paragraphs and blockquote styling:
-    blockquote {
-      background-color: #110f10;
-      color: #b94a3b;
-      margin-top: 0;
-      padding: 10px;
-    }
-
     p {
-      strong {
-        color: #b8a45a;
-
-        &:not(:last-of-type > strong) {
-          margin-right: 5px;
-        }
-      }
-
-      &:last-of-type > strong {
-        display: block;
-        text-align: center;
-      }
-    }
-
-    // Unique badge styling:
-    .badge-container {
-      .badge {
-        font-size: 1.4rem;
-        font-weight: bold;
-        margin: 5px 0;
-        padding: 5px 10px;
-        display: inline-block;
-        border-radius: 10px;
-
-        &.protagonist,
-        &.co-protagonist {
-          color: #000;
-        }
-
-        &.antagonist,
-        &.catalyst,
-        &.supporting {
-          color: #e8dddd;
-        }
-
-        &.protagonist {
-          background-color: #b8a45a;
-        }
-
-        &.co-protagonist {
-          background-color: #8caa83;
-        }
-
-        &.antagonist {
-          background-color: #c1121f;
-        }
-
-        &.catalyst {
-          background-color: #b94a3b;
-        }
-
-        &.supporting {
-          background-color: #555;
-        }
-      }
-    }
-
-    // Status styling:
-    .status-container {
-      p {
-        margin-block: 0;
-        min-width: 141px;
-        display: flex;
-        align-content: center;
-        justify-content: center;
-        gap: 10px;
-
-        .alive {
-          color: #8caa83;
-        }
-
-        .dead {
-          color: #c1121f;
-        }
-
-        .unknown {
-          color: #54a5f5;
-        }
-      }
-
-      // Status toggle button styling:
-      .toggle-btn {
-        background-color: dodgerblue;
-
-        &:hover {
-          background-color: #54a5f5;
-        }
-        &:active {
-          background-color: dodgerblue;
-        }
-      }
-    }
-
-    .remove-btn {
-      background-color: red;
+      text-align: center;
     }
   }
 }

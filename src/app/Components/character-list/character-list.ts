@@ -3,7 +3,6 @@
 import { Component, inject } from '@angular/core';
 import { CharacterCard } from '../character-card/character-card';
 import { removeEvent } from '../../Shared/Models/remove-event-data';
-import { statEvent } from '../../Shared/Models/status-event-data';
 import { CharacterService } from '../../Shared/Services/character-service';
 
 @Component({
@@ -25,20 +24,6 @@ export class CharacterList {
     console.log(
       `Character ${event.id}:
       ${event.name} has been removed.`,
-    );
-  }
-
-  // Function to console a message upon toggle:
-  handleStat(event: statEvent): void {
-    // Updating property's value by converting back to boolean:
-    const newStatus =
-      event.newStat === 'Alive' ? true : event.newStat === 'Dead' ? false : undefined;
-
-    this.charactersService.toggleStat(event.id, newStatus);
-
-    console.log(
-      `Character ${event.id}:
-        Status updated to ${event.newStat} from ${event.oldStat}.`,
     );
   }
 }

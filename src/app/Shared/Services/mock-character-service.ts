@@ -58,6 +58,7 @@ export class MockCharacterService {
       if (index === -1) return list;
 
       const updated = [...list];
+
       updated[index] = {
         ...updated[index],
         status,

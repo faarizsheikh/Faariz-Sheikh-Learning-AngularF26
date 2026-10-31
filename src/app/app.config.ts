@@ -1,7 +1,7 @@
 // APPLICATION DI PROVIDERS (app.config.ts):
 
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { APP_CONFIG } from './Shared/Config/app-config';
 import { CharacterService } from './Shared/Services/character-service';
 import { MockCharacterService } from './Shared/Services/mock-character-service';
@@ -10,7 +10,7 @@ import { routes } from './app.routes';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes),
+    provideRouter(routes, withComponentInputBinding()),
     {
       provide: APP_CONFIG, // Identifies token.
       useValue: {
@@ -22,7 +22,7 @@ export const appConfig: ApplicationConfig = {
     {
       provide: CharacterService,
 
-      // Removing this will switch back to real data.
+      // Removing this will switch back to real data:
       // useClass: MockCharacterService,
     },
   ],

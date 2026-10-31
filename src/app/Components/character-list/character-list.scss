@@ -1,5 +1,6 @@
 /* -- CHARACTER LIST COMPONENT STYLING (character-list.component.scss): -- */
 
+// CHARACTER LIST STYLING:
 .character-list {
   .data-source {
     color: #e8dddd;
@@ -15,28 +16,31 @@
     }
   }
 
+  .separator {
+    border-top: 4px solid #b8a45a;
+  }
+
+  // CHILD COMPONENT STYLING:
   app-character-card {
-    &.first {
-      border-top: 4px solid #b8a45a;
+    &.even,
+    &.odd {
+      display: block;
     }
 
     &.last {
       color: #e8dddd;
     }
 
-    &.even,
-    &.odd {
-      display: block;
-    }
-
     &.even {
       background-color: #191313;
     }
+
     &.odd {
       background-color: #2b1818;
     }
   }
 
+  // EMPTY LIST STYLING:
   .empty-list {
     h3,
     p {
