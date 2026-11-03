@@ -1,8 +1,8 @@
 // GLOBAL ROUTING CONFIGURATION (app.routes.ts):
 
 import { Routes } from '@angular/router';
-import { CharacterList } from './Components/character-list/character-list';
 import { CharacterDetail } from './Components/character-detail/character-detail';
+import { CharacterList } from './Components/character-list/character-list';
 import { PageNotFound } from './Components/page-not-found/page-not-found';
 
 export const routes: Routes = [

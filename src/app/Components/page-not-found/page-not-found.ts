@@ -1,9 +1,10 @@
 /* -- PAGE NOT FOUND COMPONENT CLASS (page-not-found.component.ts): -- */
 
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [],
+  imports: [RouterLink],
   selector: 'app-page-not-found',
   styleUrl: './page-not-found.scss',
   templateUrl: './page-not-found.html',

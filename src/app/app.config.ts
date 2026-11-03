@@ -4,7 +4,7 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { APP_CONFIG } from './Shared/Config/app-config';
 import { CharacterService } from './Shared/Services/character-service';
-import { MockCharacterService } from './Shared/Services/mock-character-service';
+// import { MockCharacterService } from './Shared/Services/mock-character-service';
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {

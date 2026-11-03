@@ -4,7 +4,7 @@
 :root {
   background-color: #000;
   font-family: Roboto, sans-serif;
-  font-size: 62.5%; /* 62.5% of 16px = 10px */
+  font-size: 62.5%; /* 62.5% of 16px = 10px; 1rem = 10px; */
 }
 
 // HEADING STYLING:
@@ -16,7 +16,7 @@ h3 {
 
 h1 {
   color: #c1121f;
-  font-size: 3.2em;
+  font-size: 3.2rem;
   text-align: center;
 
   &:hover {
@@ -26,16 +26,16 @@ h1 {
 
 h2 {
   color: #b8a45a;
-  font-size: 2.8em;
+  font-size: 2.8rem;
 }
 
 h3 {
   color: #e8dddd;
-  font-size: 2.6em;
+  font-size: 2.6rem;
 
-  .name {
-    padding: 10px;
+  &.name {
     margin: 0;
+    padding: 0.1rem;
   }
 }
 
@@ -44,32 +44,21 @@ p,
 a,
 blockquote {
   color: #e8dddd;
-  font-size: 1.8em;
+  font-size: 1.8rem;
+  width: 100%;
   line-height: 1.75;
 }
 
-// PARAGRAPH STYLING:
-p {
-  strong {
-    color: #b8a45a;
-
-    &:not(.character-description) {
-      margin-right: 5px;
-    }
-  }
-
-  // Description Paragraph Styling:
-  &.character-description > strong {
-    display: block;
-    text-align: center;
-  }
+// Paragraph Styling:
+p strong {
+  color: #b8a45a;
 }
 
-// BLOCKQUOTE STYLING:
+// Blockquote Styling:
 blockquote {
   font-style: italic;
   text-align: center;
-  padding: 10px;
+  padding: 1rem;
 
   &::before {
     content: '“';
@@ -80,24 +69,24 @@ blockquote {
   }
 }
 
-// BUTTON STYLING:
+// Button styling:
 button {
   color: #e8dddd;
-  font-size: 1.6em;
-  padding: 1.5rem 1rem;
-  width: 75px;
-  height: 30px;
-  display: flex;
+  font-size: 1.6rem;
+  padding: 0.6em 1.2em;
+  min-width: 7.5rem;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   justify-self: center;
   border: none;
+  border-radius: 1rem;
   cursor: pointer;
 
   // Add Button Styling:
   &.add-btn {
     background-color: #1e90ff;
-    margin-block: 15px 35px;
+    margin-block: 1.5rem 3.5rem;
     justify-self: left;
 
     &:hover {
@@ -150,10 +139,10 @@ button {
     }
   }
 
-  // Coming Soon Button Styling - ALWAYS AT THE END OF BUTTON STYLING TO OVERRIDE REAL STYLING:
+  // Coming Soon Button Styling
   &.coming-soon {
     background-color: #444;
-    width: 120px;
+    min-width: 12rem;
 
     &:hover {
       background-color: #444;
@@ -170,12 +159,18 @@ button {
   }
 }
 
-// Badge Styling:
+// IMAGE STYLING:
+img {
+  width: 100%;
+  height: auto;
+}
+
+// BADGE STYLING:
 .badge {
   font-size: 1.4rem;
   font-weight: bold;
-  padding: 5px 10px;
-  border-radius: 10px;
+  padding: 0.35em 0.7em;
+  border-radius: 0.7em;
 
   &.protagonist,
   &.co-protagonist {
@@ -209,17 +204,33 @@ button {
   }
 }
 
-// IMAGE STYLING:
-img {
-  width: 100%;
-  height: auto;
+// CHARACTER CARD & EMPTY LIST STYLING:
+.character-card,
+.empty-list {
+  background-color: #4a1018;
+  max-width: 60rem;
+  border: 0.2rem solid #c1121f;
+  border-radius: 0.5rem;
+}
+
+.empty-list {
+  text-align: center;
+  padding-bottom: 1.5rem;
+
+  .content {
+    text-align: center;
+
+    p {
+      line-height: 0.5;
+    }
+  }
 }
 
 // CARD FOOTER STYLING:
 .card-footer {
   background-color: #110f10;
-  padding-block: 5px;
+  padding-block: 0.5rem;
   display: flex;
+  column-gap: 1.5rem;
   justify-content: center;
-  column-gap: 15px;
 }

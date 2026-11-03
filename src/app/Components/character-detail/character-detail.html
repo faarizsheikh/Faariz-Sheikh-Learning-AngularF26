@@ -1,6 +1,6 @@
 <!-- CHARACTER DETAIL COMPONENT TEMPLATE (character-detail.component.html): -->
 
-<div class="character-detail">
+<div class="character-card">
   @if (character(); as c) {
     <div class="card-header">
       <h3 class="name">{{ c.name }}</h3>
@@ -65,6 +65,15 @@
       <button class="back-btn" routerLink="/characters">Back</button>
       <button class="toggle-btn" (click)="toggleStat()">Status</button>
       <button class="coming-soon edit-btn">Coming Soon</button>
+    </div>
+  } @else {
+    <div class="empty-list">
+      <h3>Character not found.</h3>
+
+      <div class="content">
+        <p>No character exists with ID {{ id() }}.</p>
+        <button class="back-btn" routerLink="/characters">Back</button>
+      </div>
     </div>
   }
 </div>

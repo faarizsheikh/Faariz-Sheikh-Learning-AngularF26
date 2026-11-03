@@ -2,10 +2,17 @@
 
 // CHARACTER LIST STYLING:
 .character-list {
+  p.data-source,
+  .count-container p {
+    margin-bottom: 0.5em;
+  }
+
+  // DATA INFORMATION STYLING:
   .data-source {
     color: #e8dddd;
   }
 
+  // Count Container Styling:
   .count-container {
     display: flex;
     justify-content: space-between;
@@ -17,11 +24,13 @@
   }
 
   .separator {
-    border-top: 4px solid #b8a45a;
+    border-top: 0.4em solid #b8a45a;
   }
 
   // CHILD COMPONENT STYLING:
   app-character-card {
+    margin-bottom: 2.5em;
+
     &.even,
     &.odd {
       display: block;
@@ -38,17 +47,5 @@
     &.odd {
       background-color: #2b1818;
     }
-  }
-
-  // EMPTY LIST STYLING:
-  .empty-list {
-    h3,
-    p {
-      text-align: center;
-    }
-  }
-
-  p {
-    margin-bottom: 5px;
   }
 }
