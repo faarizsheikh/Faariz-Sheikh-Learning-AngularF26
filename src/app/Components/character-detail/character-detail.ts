@@ -1,12 +1,12 @@
 /* -- CHARACTER DETAIL COMPONENT CLASS (character-detail.component.ts): -- */
 
-import { NgOptimizedImage } from '@angular/common';
+import { NgClass, NgOptimizedImage } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
 import { CharacterService } from '../../Shared/Services/character-service';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [NgOptimizedImage, RouterLink],
+  imports: [NgOptimizedImage, RouterLink, NgClass],
   selector: 'app-character-detail',
   styleUrl: './character-detail.scss',
   templateUrl: './character-detail.html',
@@ -20,6 +20,7 @@ export class CharacterDetail {
     this.characterService.charactersList().find((c) => c.id === Number(this.id())),
   );
 
+  // Change the character status:
   protected toggleStat(): void {
     const character = this.character();
 

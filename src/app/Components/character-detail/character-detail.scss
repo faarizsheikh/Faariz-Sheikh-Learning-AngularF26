@@ -55,13 +55,13 @@
       }
     }
 
-    p {
-      strong:not(.character-description) {
-        margin-right: 0.5rem;
+    // Description Paragraph Styling:
+    p.character-description {
+      &.short-desc {
+        text-align: center;
       }
 
-      // Description Paragraph Styling:
-      &.character-description > strong {
+      strong {
         text-align: center;
         display: block;
       }

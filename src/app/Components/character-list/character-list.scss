@@ -14,12 +14,21 @@
 
   // Count Container Styling:
   .count-container {
-    display: flex;
-    justify-content: space-between;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
 
     .character-count,
     .alive-count {
       color: #e8dddd;
+    }
+
+    .character-count {
+      grid-column: 1;
+    }
+
+    .alive-count {
+      grid-column: 4;
     }
   }
 

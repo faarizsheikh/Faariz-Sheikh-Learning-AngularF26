@@ -26,7 +26,8 @@ export class CharacterCard {
     // Sending information to the parent component (Characters-List):
     this.removeEvent.emit({
       id: character.id,
-      name: character.name,
+      firstName: character.firstName,
+      lastName: character.lastName,
     });
   }
 }

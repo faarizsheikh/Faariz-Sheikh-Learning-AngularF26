@@ -1,0 +1,65 @@
+/* -- CHARACTER FORM COMPONENT STYLING (character-form.component.scss): -- */
+
+// CHARACTER FORM STYLING:
+.character-card {
+  .card-header {
+    text-align: center;
+  }
+
+  .card-body {
+    padding: 1rem;
+
+    form {
+      display: flex;
+      flex-direction: column;
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        label {
+          color: #b8a45a;
+          font-size: 1.8rem;
+          font-weight: bold;
+          margin-top: 10px;
+        }
+
+        input,
+        textarea,
+        select {
+          background-color: #110f10;
+          color: #e8dddd;
+          border: 0.2rem solid #4a1018;
+          border-radius: 0.5rem;
+          padding: 1rem;
+          font-size: 1.6rem;
+          font-family: inherit;
+          width: 100%;
+          box-sizing: border-box;
+        }
+
+        textarea {
+          min-height: 10rem;
+          resize: vertical;
+        }
+
+        input[type='checkbox'] {
+          width: 2rem;
+          height: 2rem;
+          accent-color: #c1121f;
+        }
+
+        .error {
+          color: #ff6b6b;
+          font-size: 1.5rem;
+          margin: 0;
+        }
+      }
+
+      .card-footer {
+        margin-top: 1rem;
+      }
+    }
+  }
+}

@@ -4,9 +4,10 @@ import { Component, inject } from '@angular/core';
 import { CharacterCard } from '../character-card/character-card';
 import { removeEvent } from '../../Shared/Models/remove-event-data';
 import { CharacterService } from '../../Shared/Services/character-service';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [CharacterCard],
+  imports: [CharacterCard, RouterLink],
   selector: 'app-character-list',
   styleUrl: './character-list.scss',
   templateUrl: './character-list.html',
@@ -23,7 +24,7 @@ export class CharacterList {
 
     console.log(
       `Character ${event.id}:
-      ${event.name} has been removed.`,
+      ${event.firstName} ${event.lastName} has been removed.`,
     );
   }
 }

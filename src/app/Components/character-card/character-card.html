@@ -7,22 +7,35 @@
         {{ character().id }}
       </p>
     }
-    <h3 class="name">{{ character().name }}</h3>
+
+    <h3 class="name">
+      @if (character().firstName.length >= 10 || character().lastName.length >= 10) {
+        <span class="longer">{{ character().firstName }}<br />{{ character().lastName }}</span>
+      } @else {
+        <span class="shorter">
+          {{ character().firstName }} "{{ character().nickName }}" {{ character().lastName }}
+        </span>
+      }
+    </h3>
 
     <p class="badge-container">
       @switch (character().character_type) {
         @case ('Protagonist') {
           <span class="badge protagonist">Protagonist</span>
         }
+
         @case ('Co-Protagonist') {
           <span class="badge co-protagonist">Co-Protagonist</span>
         }
+
         @case ('Antagonist') {
           <span class="badge antagonist">Antagonist</span>
         }
+
         @case ('Catalyst') {
           <span class="badge catalyst">Catalyst</span>
         }
+
         @default {
           <span class="badge supporting">Supporting Character</span>
         }
@@ -32,21 +45,20 @@
 
   <div class="card-body">
     <img
-      [alt]="character().name"
-      [ngSrc]="character().imageLink"
-      [title]="character().name"
       class="game-image"
       width="480"
       height="485"
       priority="true"
+      [ngSrc]="character().imageLink || 'Assets/no-img.png'"
+      [alt]="'character().firstName ' + 'character().lastName'"
+      [title]="'character().firstName ' + 'character().lastName'"
     />
-
     <p><strong>Played by:</strong>{{ character().played_by }}</p>
   </div>
 
   <div class="card-footer">
     <button class="remove-btn" (click)="removeCharacter()">Remove</button>
     <button class="view-btn" [routerLink]="['/characters', character().id, 'view']">View</button>
-    <button class="coming-soon edit-btn">Coming Soon</button>
+    <button class="edit-btn" [disabled]="true">Coming Soon</button>
   </div>
 </div>

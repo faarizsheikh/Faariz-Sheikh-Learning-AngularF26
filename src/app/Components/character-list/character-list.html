@@ -17,17 +17,18 @@
         <p class="character-count">There are {{ count }} items found.</p>
         <p class="alive-count">Alive Characters: {{ aliveCharacterCount() }}</p>
       </div>
+
       <div class="separator"></div>
-      <button class="coming-soon add-btn">Coming Soon</button>
+      <button class="add-btn" routerLink="/characters/add">Add</button>
     }
     <app-character-card
       [character]="character"
       [class.even]="even"
+      [class.odd]="odd"
       [class.first]="first"
       [class.last]="last"
       [isFirst]="first"
       [isLast]="last"
-      [class.odd]="odd"
       (removeEvent)="handleRemove($event)"
     ></app-character-card>
 

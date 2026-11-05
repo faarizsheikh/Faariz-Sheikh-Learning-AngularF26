@@ -2,6 +2,7 @@
 
 import { Routes } from '@angular/router';
 import { CharacterDetail } from './Components/character-detail/character-detail';
+import { CharacterForm } from './Components/character-form/character-form';
 import { CharacterList } from './Components/character-list/character-list';
 import { PageNotFound } from './Components/page-not-found/page-not-found';
 
@@ -10,6 +11,8 @@ export const routes: Routes = [
 
   { path: 'characters', component: CharacterList },
   { path: 'characters/:id/view', component: CharacterDetail },
+
+  { path: 'characters/add', component: CharacterForm },
 
   { path: 'char', redirectTo: '/characters', pathMatch: 'full' },
   { path: 'chars', redirectTo: '/characters', pathMatch: 'full' },

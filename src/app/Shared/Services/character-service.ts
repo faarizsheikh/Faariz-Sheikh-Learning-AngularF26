@@ -17,7 +17,9 @@ export class CharacterService {
   private characters = signal<Character[]>([
     {
       id: 1,
-      name: 'Billy “Bill” Denbrough',
+      firstName: 'Billy',
+      nickName: 'Bill',
+      lastName: 'Denbrough',
       quote:
         'I go home and all I see is that ' +
         "Georgie isn't there. " +
@@ -38,7 +40,9 @@ export class CharacterService {
     },
     {
       id: 2,
-      name: 'George “Georgie” Denbrough',
+      firstName: 'George',
+      nickName: 'Georgie',
+      lastName: 'Denbrough',
       quote: '(Referring to the boat) She?... She. Thanks, Billy.',
       age: 6,
       gender: 'Male',
@@ -46,16 +50,18 @@ export class CharacterService {
       played_by: 'Jackson Robert Scott',
       character_type: 'Catalyst',
       description:
-        'George Elmer Denbrough is a sweet, young boy, ' +
-        'whose death causes deep trauma and survivor’s guilt for Bill, ' +
+        'George Elmer Denbrough was a sweet, young boy, ' +
+        'whose death caused deep trauma and survivor’s guilt for Bill, ' +
         "driving the Losers' Club to hunt the evil entity.",
       imageLink: '../../Assets/character-images/george-den.png',
     },
     {
       id: 3,
-      name: 'Pennywise (AKA Deadlights)',
+      firstName: 'Deadlights',
+      nickName: 'IT',
+      lastName: 'Pennywise',
       quote:
-        "No! I'll take him! I'll take all of you! " +
+        "No! 'll take him! I'll take all of you! " +
         "I'll feast on your flesh as I feed on your fear..." +
         "Or...you'll just leave us be..." +
         'I will take him. Only him, and I will have my long rest ' +
@@ -63,7 +69,8 @@ export class CharacterService {
         'grow and thrive and lead *happy* lives, ' +
         'until old age takes you back to the weeds.',
       age: 'Unknown',
-      gender: 'She (True physical); IT (Cosmetic).',
+      gender: 'Unknown',
+      // gender: 'She (True physical); IT (Cosmetic).',
       played_by: 'Bill Skarsgård',
       character_type: 'Antagonist',
       description:
@@ -75,7 +82,9 @@ export class CharacterService {
     },
     {
       id: 4,
-      name: 'Rich “Richie” Tozier',
+      firstName: 'Rich',
+      nickName: 'Richie',
+      lastName: 'Tozier',
       quote:
         '(Censored version:) I told you, Bill. I fricking told you. ' +
         "I don't wanna die. It's your fault. " +
@@ -98,7 +107,9 @@ export class CharacterService {
     },
     {
       id: 5,
-      name: 'Stanley “Stan” Uris',
+      firstName: 'Stanley',
+      nickName: 'Stan',
+      lastName: 'Uris',
       quote: 'No! No next time, Bill!',
       age: 13,
       gender: 'Male',
@@ -113,7 +124,9 @@ export class CharacterService {
     },
     {
       id: 6,
-      name: 'Eddie "Edds" Kaspbrak',
+      firstName: 'Eddie',
+      nickName: 'Edds',
+      lastName: 'Kaspbrak',
       quote: '[To Richie Tozier] -puffs- Have you ever ' + 'heard of a staph infection?',
       age: 13,
       gender: 'Male',
@@ -131,7 +144,9 @@ export class CharacterService {
     },
     {
       id: 7,
-      name: 'Beverly “Bev” Marsh',
+      firstName: 'Beverly',
+      nickName: 'Bev',
+      lastName: 'Marsh',
       quote:
         '[To the Losers] This is what it wants. ' +
         'It wants to divide us. ' +
@@ -153,7 +168,9 @@ export class CharacterService {
     },
     {
       id: 8,
-      name: 'Michael “Mike” Hanlon',
+      firstName: 'Michael',
+      nickName: 'Mike',
+      lastName: 'Hanlon',
       quote:
         'My grandfather thinks this town is cursed. ' +
         'He says that all the bad things ' +
@@ -172,7 +189,9 @@ export class CharacterService {
     },
     {
       id: 9,
-      name: 'Benjamin “Ben” Hanscom',
+      firstName: 'Benjamin',
+      nickName: 'Ben',
+      lastName: 'Hanscom',
       quote:
         "[Shouting after Beverly] Please don't go girl! " +
         "That's the name of another..." +

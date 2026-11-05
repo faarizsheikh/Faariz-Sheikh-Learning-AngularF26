@@ -62,6 +62,10 @@
     h3 {
       grid-column: 2;
     }
+
+    h3:has(.longer) {
+      margin: 15px;
+    }
   }
 
   // CARD BODY STYLING:

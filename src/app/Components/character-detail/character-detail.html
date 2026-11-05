@@ -3,40 +3,44 @@
 <div class="character-card">
   @if (character(); as c) {
     <div class="card-header">
-      <h3 class="name">{{ c.name }}</h3>
+      <h3 class="name">{{ c.firstName }} "{{ c.nickName }}" {{ c.lastName }}</h3>
 
       <img
-        [alt]="c.name"
-        [ngSrc]="c.imageLink"
-        [title]="c.name"
         class="game-image"
         width="480"
         height="485"
         priority="true"
+        [ngSrc]="c.imageLink || 'Assets/no-img.png'"
+        [alt]="'c.firstName ' + 'c.lastName'"
+        [title]="'c.firstName ' + 'c.lastName'"
       />
     </div>
 
     <div class="card-body">
-      <blockquote>{{ c.quote }}</blockquote>
+      <blockquote [class]="c.quote ? 'quote' : 'no-quote'">{{ c.quote }}</blockquote>
 
-      <p class="age"><strong>Age:</strong>{{ c.age }}</p>
+      <p class="age"><strong>Age:</strong>{{ c.age ? c.age : 'Unknown' }}</p>
       <p class="gender"><strong>Gender:</strong>{{ c.gender }}</p>
-      <p class="actor"><strong>Played by:</strong>{{ c.played_by }}</p>
+      <p class="played_by"><strong>Played by:</strong>{{ c.played_by }}</p>
 
       <div class="badge-container">
         @switch (c.character_type) {
           @case ('Protagonist') {
             <span class="badge protagonist">Protagonist</span>
           }
+
           @case ('Co-Protagonist') {
             <span class="badge co-protagonist">Co-Protagonist</span>
           }
+
           @case ('Antagonist') {
             <span class="badge antagonist">Antagonist</span>
           }
+
           @case ('Catalyst') {
             <span class="badge catalyst">Catalyst</span>
           }
+
           @default {
             <span class="badge supporting">Supporting Character</span>
           }
@@ -46,6 +50,7 @@
       <div class="status-container">
         <p>
           <strong>Status:</strong>
+
           @if (c.status !== undefined) {
             @if (c.status) {
               <span class="status alive">Alive</span>
@@ -58,13 +63,18 @@
         </p>
       </div>
 
-      <p class="character-description"><strong>Description:</strong>{{ c.description }}</p>
+      <p
+        class="character-description"
+        [class]="c.description.length <= 117 ? 'short-desc' : 'long-desc'"
+      >
+        <strong>Description:</strong>{{ c.description ? c.description : 'N/A' }}
+      </p>
     </div>
 
     <div class="card-footer">
       <button class="back-btn" routerLink="/characters">Back</button>
       <button class="toggle-btn" (click)="toggleStat()">Status</button>
-      <button class="coming-soon edit-btn">Coming Soon</button>
+      <button class="edit-btn" [disabled]="true">Coming Soon</button>
     </div>
   } @else {
     <div class="empty-list">
