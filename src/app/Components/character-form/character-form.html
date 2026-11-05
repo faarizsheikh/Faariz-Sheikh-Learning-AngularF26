@@ -19,28 +19,9 @@
         />
 
         <div class="error fname">
-          @if (
-            characterForm.controls.firstName.touched &&
-            characterForm.controls.firstName.hasError('required')
-          ) {
-            <p class="error">Character's first name is required.</p>
-          }
-
-          @if (
-            characterForm.controls.firstName.touched &&
-            characterForm.controls.firstName.hasError('minlength')
-          ) {
-            <p class="error">
-              Character's first name must contain at least {{ nameMinL }} characters.
-            </p>
-          }
-
-          @if (
-            characterForm.controls.firstName.touched &&
-            characterForm.controls.firstName.hasError('maxlength')
-          ) {
-            <p class="error">Character's first name can NOT exceed {{ nameMaxL }} characters.</p>
-          }
+          <p class="error">
+            {{ errMsg('firstName', "Character's first name", nameMinL, nameMaxL) }}
+          </p>
         </div>
       </div>
 
@@ -56,21 +37,9 @@
         />
 
         <div class="error nk-name">
-          @if (
-            characterForm.controls.nickName.touched &&
-            characterForm.controls.nickName.hasError('minlength')
-          ) {
-            <p class="error">
-              Character's nickname must contain at least {{ nameMinL }} characters.
-            </p>
-          }
-
-          @if (
-            characterForm.controls.nickName.touched &&
-            characterForm.controls.nickName.hasError('maxlength')
-          ) {
-            <p class="error">Character's nickname can NOT exceed {{ nameMaxL }} characters.</p>
-          }
+          <p class="error">
+            {{ errMsg('nickName', "Character's nickname", nameMinL, nameMaxL) }}
+          </p>
         </div>
       </div>
 
@@ -86,28 +55,9 @@
         />
 
         <div class="error lname">
-          @if (
-            characterForm.controls.lastName.touched &&
-            characterForm.controls.lastName.hasError('required')
-          ) {
-            <p class="error">Character's last name is required.</p>
-          }
-
-          @if (
-            characterForm.controls.lastName.touched &&
-            characterForm.controls.lastName.hasError('minlength')
-          ) {
-            <p class="error">
-              Character's last name must contain at least {{ nameMinL }} characters.
-            </p>
-          }
-
-          @if (
-            characterForm.controls.lastName.touched &&
-            characterForm.controls.lastName.hasError('maxlength')
-          ) {
-            <p class="error">Character's last name can NOT exceed {{ nameMaxL }} characters.</p>
-          }
+          <p class="error">
+            {{ errMsg('lastName', "Character's last name", nameMinL, nameMaxL) }}
+          </p>
         </div>
       </div>
 
@@ -122,26 +72,9 @@
         ></textarea>
 
         <div class="error qt">
-          @if (
-            characterForm.controls.quote.touched &&
-            characterForm.controls.quote.hasError('required')
-          ) {
-            <p class="error">A spoken quote from this character is required.</p>
-          }
-
-          @if (
-            characterForm.controls.quote.touched &&
-            characterForm.controls.quote.hasError('minlength')
-          ) {
-            <p class="error">Character's quote must contain at least {{ quoteMinL }} characters.</p>
-          }
-
-          @if (
-            characterForm.controls.quote.touched &&
-            characterForm.controls.quote.hasError('maxlength')
-          ) {
-            <p class="error">Character's quote can NOT exceed {{ quoteMaxL }} characters.</p>
-          }
+          <p class="error">
+            {{ errMsg('quote', "Character's quote", quoteMinL, quoteMaxL) }}
+          </p>
         </div>
       </div>
 
@@ -160,17 +93,9 @@
         />
 
         <div class="error yrs">
-          @if (
-            characterForm.controls.age.touched && characterForm.controls.age.hasError('minLength')
-          ) {
-            <p class="error">Character's age must be older than {{ ageMinL }}.</p>
-          }
-
-          @if (
-            characterForm.controls.age.touched && characterForm.controls.age.hasError('maxLength')
-          ) {
-            <p class="error">Character's age can NOT exceed {{ ageMaxL }} characters.</p>
-          }
+          <p class="error">
+            {{ errMsg('age', "Character's age", ageMinL, ageMaxL) }}
+          </p>
         </div>
       </div>
 
@@ -179,19 +104,15 @@
         <label for="gender">Gender:</label>
 
         <select id="gender" formControlName="gender">
-          <option value="">[ -- Select Gender -- ]</option>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-          <option value="Unknown">Unknown</option>
+          @for (gender of genders; track gender[0]) {
+            <option [value]="gender[0]">{{ gender[1] }}</option>
+          }
         </select>
 
         <div class="error gen">
-          @if (
-            characterForm.controls.gender.touched &&
-            characterForm.controls.gender.hasError('required')
-          ) {
-            <p class="error">Please select the gender of this character.</p>
-          }
+          <p class="error">
+            {{ errMsg('gender', "Character's gender") }}
+          </p>
         </div>
       </div>
 
@@ -207,30 +128,9 @@
         />
 
         <div class="error played_by">
-          @if (
-            characterForm.controls.played_by.touched &&
-            characterForm.controls.played_by.hasError('required')
-          ) {
-            <p class="error">The name of actor / actress who played this character is required.</p>
-          }
-
-          @if (
-            characterForm.controls.played_by.touched &&
-            characterForm.controls.played_by.hasError('minlength')
-          ) {
-            <p class="error">
-              Character's actor / actress name must contain at least {{ actorMinL }} characters.
-            </p>
-          }
-
-          @if (
-            characterForm.controls.played_by.touched &&
-            characterForm.controls.played_by.hasError('maxlength')
-          ) {
-            <p class="error">
-              Character's actor / actress name can NOT exceed {{ actorMaxL }} characters.
-            </p>
-          }
+          <p class="error">
+            {{ errMsg('played_by', 'Actor / Actress Name', actorMinL, actorMaxL) }}
+          </p>
         </div>
       </div>
 
@@ -239,21 +139,15 @@
         <label for="character_type">Character Type:</label>
 
         <select id="character_type" formControlName="character_type">
-          <option value="">[ -- Select Character Type -- ]</option>
-          <option value="Protagonist">Protagonist</option>
-          <option value="Co-Protagonist">Co-Protagonist</option>
-          <option value="Antagonist">Antagonist</option>
-          <option value="Catalyst">Catalyst</option>
-          <option value="Supporting Character">Supporting Character</option>
+          @for (type of charTypes; track type[0]) {
+            <option [value]="type[0]">{{ type[1] }}</option>
+          }
         </select>
 
         <div class="error ctp">
-          @if (
-            characterForm.controls.character_type.touched &&
-            characterForm.controls.character_type.hasError('required')
-          ) {
-            <p class="error">Please select the type of character they are.</p>
-          }
+          <p class="error">
+            {{ errMsg('character_type', 'Character Type') }}
+          </p>
         </div>
       </div>
 
@@ -268,19 +162,9 @@
         ></textarea>
 
         <div class="error dsc">
-          @if (
-            characterForm.controls.description.touched &&
-            characterForm.controls.description.hasError('minlength')
-          ) {
-            <p class="error">Character's description must be at least {{ descMinL }} characters.</p>
-          }
-
-          @if (
-            characterForm.controls.description.touched &&
-            characterForm.controls.description.hasError('maxlength')
-          ) {
-            <p class="error">Character's description can NOT exceed {{ descMaxL }} characters.</p>
-          }
+          <p class="error">
+            {{ errMsg('description', "Character's description", descMinL, descMaxL) }}
+          </p>
         </div>
       </div>
 
@@ -292,27 +176,13 @@
           id="imageLink"
           type="text"
           formControlName="imageLink"
-          placeholder="Enter a path to the character's picture."
+          placeholder="Enter a path to the character's image."
         />
 
         <div class="error img">
-          @if (
-            characterForm.controls.imageLink.touched &&
-            characterForm.controls.imageLink.hasError('minlength')
-          ) {
-            <p class="error">
-              Path to character's picture must be at least {{ imgMinL }} characters.
-            </p>
-          }
-
-          @if (
-            characterForm.controls.imageLink.touched &&
-            characterForm.controls.imageLink.hasError('maxlength')
-          ) {
-            <p class="error">
-              Path to character's picture can NOT exceed {{ imgMaxL }} characters.
-            </p>
-          }
+          <p class="error">
+            {{ errMsg('imageLink', "Path to character's image", imgMinL, imgMaxL) }}
+          </p>
         </div>
       </div>
 
@@ -321,19 +191,13 @@
         <label for="status">Status:</label>
 
         <select id="status" formControlName="status">
-          <option [ngValue]="null">[ -- Select Status -- ]</option>
-          <option [ngValue]="true">Alive</option>
-          <option [ngValue]="undefined">Unknown</option>
-          <option [ngValue]="false">Dead</option>
+          @for (stat of stats; track $index) {
+            <option [ngValue]="stat[0]">{{ stat[1] }}</option>
+          }
         </select>
 
         <div class="error status">
-          @if (
-            characterForm.controls.status.touched &&
-            characterForm.controls.status.hasError('required')
-          ) {
-            <p class="error">Selecting this character's status is required.</p>
-          }
+          {{ errMsg('status', "Character's status") }}
         </div>
       </div>
 

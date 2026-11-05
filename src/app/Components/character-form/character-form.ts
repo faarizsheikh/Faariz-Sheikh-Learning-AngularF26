@@ -12,7 +12,6 @@ import {
 import { CharacterService } from '../../Shared/Services/character-service';
 import { Router } from '@angular/router';
 import { Character } from '../../Shared/Models/character-data';
-import { maxLength } from '@angular/forms/signals';
 
 @Component({
   imports: [ReactiveFormsModule],
@@ -21,9 +20,12 @@ import { maxLength } from '@angular/forms/signals';
   templateUrl: './character-form.html',
 })
 export class CharacterForm {
+  // Injection:
   private fb = inject(FormBuilder);
   private characterService = inject(CharacterService);
   private router = inject(Router);
+
+  // Variables:
   nameMinL = 2;
   nameMaxL = 15;
   quoteMinL = 15;
@@ -38,6 +40,31 @@ export class CharacterForm {
   imgMinL = 10;
   imgMaxL = 500;
 
+  // Arrays:
+  genders: string[][] = [
+    ['', '[ -- Select Gender -- ]'],
+    ['Male', 'Male'],
+    ['Female', 'Female'],
+    ['Unknown', 'Unknown'],
+  ];
+
+  charTypes: string[][] = [
+    ['', '[ -- Select Character Type -- ]'],
+    ['Protagonist', 'Protagonist'],
+    ['Co-Protagonist', 'Co-Protagonist'],
+    ['Antagonist', 'Antagonist'],
+    ['Catalyst', 'Catalyst'],
+    ['Supporting Character', 'Supporting Character'],
+  ];
+
+  stats: [boolean | null | undefined, string][] = [
+    [null, '[ -- Select Status -- ]'],
+    [true, 'Alive'],
+    [undefined, 'Unknown'],
+    [false, 'Dead'],
+  ];
+
+  // CHARACTER FORM:
   characterForm = this.fb.group({
     firstName: [
       '',
@@ -60,7 +87,7 @@ export class CharacterForm {
     ],
 
     quote: ['', [Validators.minLength(this.quoteMinL), Validators.maxLength(this.quoteMaxL)]],
-    age: ['', [Validators.minLength(this.ageMinL), Validators.maxLength(this.ageMaxL)]],
+    age: ['', [Validators.min(this.ageMinL), Validators.max(this.ageMaxL)]],
     gender: ['', Validators.required],
     played_by: [
       '',
@@ -134,15 +161,27 @@ export class CharacterForm {
     });
   }
 
+  // Error Message:
+  protected errMsg(controlName: string, fieldName: string, minL?: number, maxL?: number): string {
+    const control = this.characterForm.get(controlName);
+
+    return !control?.touched
+      ? ''
+      : control.hasError('required')
+        ? `${fieldName} is required.`
+        : control.hasError('minlength') || control.hasError('maxlength')
+          ? `${fieldName} must be between ${minL} and ${maxL} characters.`
+          : control.hasError('min') || control.hasError('max')
+            ? `${fieldName} must be between ${minL} and ${maxL}.`
+            : '';
+  }
+
   // CUSTOM VALIDATORS:
 
   // Reject null (default value for status) as input.
-
   statusRequired(control: AbstractControl): ValidationErrors | null {
-    // Source used: https://angular.dev/api/forms/AbstractControl
     return control.value === null ? { required: true } : null;
   }
 
   protected readonly isFormControl = isFormControl;
-  protected readonly maxLength = maxLength;
 }
