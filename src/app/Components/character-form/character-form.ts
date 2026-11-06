@@ -1,3 +1,5 @@
+// CHARACTER FORM COMPONENT CLASS (character-form.component.ts):
+
 import { Component, inject, input, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -18,7 +20,7 @@ import { Character } from '../../Shared/Models/character-data';
   templateUrl: './character-form.html',
 })
 export class CharacterForm implements OnInit {
-  // Injection:
+  // Dependency Injection:
   private fb = inject(FormBuilder);
   private characterService = inject(CharacterService);
   private router = inject(Router);

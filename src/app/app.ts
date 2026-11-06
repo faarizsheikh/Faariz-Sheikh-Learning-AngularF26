@@ -1,7 +1,8 @@
 // ROOT COMPONENT DEFINITION (app.ts):
 
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { EditGuardService } from './Shared/Services/edit-guard-service';
 
 @Component({
   imports: [RouterOutlet],
@@ -9,4 +10,7 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.scss',
   templateUrl: './app.html',
 })
-export class App {}
+export class App {
+  // Dependency Injection:
+  protected editGuardService = inject(EditGuardService);
+}

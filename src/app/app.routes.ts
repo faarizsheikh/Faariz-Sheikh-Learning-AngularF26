@@ -1,6 +1,7 @@
 // GLOBAL ROUTING CONFIGURATION (app.routes.ts):
 
 import { Routes } from '@angular/router';
+import { editGuard } from './Shared/Guards/edit.guard';
 import { CharacterDetail } from './Components/character-detail/character-detail';
 import { CharacterForm } from './Components/character-form/character-form';
 import { CharacterList } from './Components/character-list/character-list';
@@ -12,7 +13,7 @@ export const routes: Routes = [
   { path: 'characters/add', component: CharacterForm },
 
   { path: 'characters/:id/view', component: CharacterDetail },
-  { path: 'characters/:id/edit', component: CharacterForm },
+  { path: 'characters/:id/edit', component: CharacterForm, canActivate: [editGuard] },
 
   { path: 'char', redirectTo: '/characters', pathMatch: 'full' },
   { path: 'chars', redirectTo: '/characters', pathMatch: 'full' },

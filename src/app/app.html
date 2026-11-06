@@ -1,7 +1,22 @@
 <!-- ROOT COMPONENT TEMPLATE (app.html): -->
 
 <div class="container">
-  <h1>IT: Chapter One (2017)</h1>
+  <header>
+    <h1>IT: Chapter One (2017)</h1>
+
+    <nav class="navbar">
+      <p>
+        Editing:
+        <strong>
+          {{ editGuardService.guardEnabled() ? 'Locked' : 'Unlocked' }}
+        </strong>
+      </p>
+
+      <button class="toggle-btn" (click)="editGuardService.toggleGuard()">
+        {{ editGuardService.guardEnabled() ? 'Unlock' : 'Lock' }} Editing
+      </button>
+    </nav>
+  </header>
 
   <router-outlet />
 </div>

@@ -7,4 +7,31 @@
   max-width: 60em;
   border-radius: 0.8em;
   box-shadow: 0 0.4em 1.2em #4a1018;
+
+  // NAVBAR STYLING:
+  .navbar {
+    background-color: #110f10;
+    border: 0.2em solid #4a1018;
+    border-radius: 0.8em;
+    padding-inline: 1.5em;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    p {
+      color: #e8dddd;
+      width: auto;
+      margin-block: 0.5em;
+    }
+
+    strong {
+      color: #b8a45a;
+    }
+
+    button {
+      margin-block: 1em;
+    }
+  }
 }
