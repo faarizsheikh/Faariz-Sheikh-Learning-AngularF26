@@ -227,9 +227,25 @@ export class CharacterService {
   // Count for number of alive characters:
   readonly aliveCharacterCount = computed(() => this.aliveCharacters().length);
 
+  // Methods related to retrieving a character using its id:
+  getCharacter(id: number): Character | undefined {
+    return this.getById(id);
+  }
+
+  getById(id: number): Character | undefined {
+    return this.characters().find((character) => character.id === id);
+  }
+
   // Method to add a new character and include it in a new array list containing both old and new ones:
   addCharacter(character: Character): void {
     this.characters.update((list) => [...list, character]);
+  }
+
+  // Method to update an existing character:
+  updateCharacter(updated: Character): void {
+    this.characters.update((list) =>
+      list.map((character) => (character.id === updated.id ? updated : character)),
+    );
   }
 
   // Method to create a new array list and exclude the removed character:

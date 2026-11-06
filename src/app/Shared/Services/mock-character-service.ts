@@ -37,9 +37,9 @@ export class MockCharacterService {
       imageLink: '../../Assets/mock-character-images/mock-character-two.png',
     },
   ]);
+
   readonly apiBaseUrl = 'MOCK DATA';
 
-  // Effect reacts to the character count change:
   constructor() {
     effect(() => {
       console.log(`Character count: ${this.characters().length}`);
@@ -54,12 +54,26 @@ export class MockCharacterService {
 
   readonly aliveCharacterCount = computed(() => this.aliveCharacters().length);
 
+  getCharacter(id: number): Character | undefined {
+    return this.getById(id);
+  }
+
+  getById(id: number): Character | undefined {
+    return this.characters().find((character) => character.id === id);
+  }
+
   addCharacter(character: Character): void {
     this.characters.update((list) => [...list, character]);
   }
 
   removeCharacter(id: number): void {
     this.characters.update((list) => list.filter((character) => character.id !== id));
+  }
+
+  updateCharacter(updated: Character): void {
+    this.characters.update((list) =>
+      list.map((character) => (character.id === updated.id ? updated : character)),
+    );
   }
 
   toggleStat(id: number, status: boolean | undefined): void {

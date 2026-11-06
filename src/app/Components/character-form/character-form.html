@@ -2,7 +2,7 @@
 
 <div class="character-card">
   <div class="card-header">
-    <h3 class="name">Add a Character:</h3>
+    <h3 class="name">{{ id() ? 'Edit' : 'Add a' }} Character:</h3>
   </div>
 
   <div class="card-body">
@@ -84,7 +84,7 @@
 
         <input
           id="age"
-          type="number"
+          type="text"
           formControlName="age"
           placeholder="Enter character's age."
           [min]="ageMinL"
@@ -208,7 +208,7 @@
           type="submit"
           [disabled]="characterForm.invalid || characterForm.pristine"
         >
-          Add
+          {{ id() ? 'Save Changes' : 'Oh, yeah, add it!' }}
         </button>
         <button class="reset-btn" type="reset" [disabled]="characterForm.pristine">Reset</button>
       </div>

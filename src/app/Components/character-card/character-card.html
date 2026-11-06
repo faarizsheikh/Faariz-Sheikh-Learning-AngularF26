@@ -59,6 +59,6 @@
   <div class="card-footer">
     <button class="remove-btn" (click)="removeCharacter()">Remove</button>
     <button class="view-btn" [routerLink]="['/characters', character().id, 'view']">View</button>
-    <button class="edit-btn" [disabled]="true">Coming Soon</button>
+    <button class="edit-btn" [routerLink]="['/characters', character().id, 'edit']">Edit</button>
   </div>
 </div>

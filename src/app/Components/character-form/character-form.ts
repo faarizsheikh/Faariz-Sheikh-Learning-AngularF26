@@ -1,6 +1,4 @@
-/* -- CHARACTER FORM COMPONENT CLASS (character-form.ts): -- */
-
-import { Component, inject } from '@angular/core';
+import { Component, inject, input, OnInit } from '@angular/core';
 import {
   FormBuilder,
   ReactiveFormsModule,
@@ -19,11 +17,14 @@ import { Character } from '../../Shared/Models/character-data';
   styleUrl: './character-form.scss',
   templateUrl: './character-form.html',
 })
-export class CharacterForm {
+export class CharacterForm implements OnInit {
   // Injection:
   private fb = inject(FormBuilder);
   private characterService = inject(CharacterService);
   private router = inject(Router);
+
+  // Route input:
+  id = input<string | undefined>();
 
   // Variables:
   nameMinL = 2;
@@ -87,8 +88,11 @@ export class CharacterForm {
     ],
 
     quote: ['', [Validators.minLength(this.quoteMinL), Validators.maxLength(this.quoteMaxL)]],
+
     age: ['', [Validators.min(this.ageMinL), Validators.max(this.ageMaxL)]],
+
     gender: ['', Validators.required],
+
     played_by: [
       '',
       [
@@ -97,13 +101,44 @@ export class CharacterForm {
         Validators.maxLength(this.actorMaxL),
       ],
     ],
+
     character_type: ['', Validators.required],
+
     description: ['', [Validators.minLength(this.descMinL), Validators.maxLength(this.descMaxL)]],
-    imageLink: [null, [Validators.minLength(this.imgMinL), Validators.maxLength(this.imgMaxL)]],
-    status: [null, this.statusRequired],
+
+    imageLink: ['', [Validators.minLength(this.imgMinL), Validators.maxLength(this.imgMaxL)]],
+
+    status: this.fb.control<boolean | null | undefined>(null, this.statusRequired),
   });
 
-  // Submit the form to add a new character:
+  // Load an existing character when editing:
+  ngOnInit(): void {
+    const id = this.id();
+
+    if (id) {
+      const character = this.characterService.getCharacter(Number(id));
+
+      if (character) {
+        this.characterForm.patchValue({
+          firstName: character.firstName,
+          nickName: character.nickName ?? '',
+          lastName: character.lastName,
+          quote: character.quote ?? '',
+          age: character.age == null ? '' : String(character.age),
+          gender: character.gender,
+          played_by: character.played_by,
+          character_type: character.character_type,
+          description: character.description ?? '',
+          imageLink: character.imageLink ?? '',
+          status: character.status ?? null,
+        });
+      } else {
+        this.router.navigate(['/characters']);
+      }
+    }
+  }
+
+  // Submit the form to add or update a character:
   protected onSubmit(): void {
     // Stop if form invalid:
     if (this.characterForm.invalid) return;
@@ -111,7 +146,49 @@ export class CharacterForm {
     // Get the values even from the disabled fields:
     const formValue = this.characterForm.getRawValue();
 
-    // Generate the next available id:
+    // EDIT MODE:
+    if (this.id()) {
+      const id = Number(this.id());
+
+      const existingCharacter = this.characterService.getCharacter(id);
+
+      if (!existingCharacter) {
+        this.router.navigate(['/characters']);
+        return;
+      }
+
+      // Create an updated character:
+      const updatedCharacter: Character = {
+        id,
+        firstName: formValue.firstName!,
+        nickName: formValue.nickName!,
+        lastName: formValue.lastName!,
+        quote: formValue.quote!,
+        age: formValue.age === '' ? undefined : Number(formValue.age),
+        gender: formValue.gender!,
+        played_by: formValue.played_by!,
+        character_type: formValue.character_type!,
+        description: formValue.description!,
+        imageLink: formValue.imageLink!,
+        status: formValue.status!,
+      };
+
+      // Update the existing character:
+      this.characterService.updateCharacter(updatedCharacter);
+
+      // Navigate back to the character details:
+      this.router.navigate(['/characters', id, 'view']);
+
+      console.log(
+        `Character ${updatedCharacter.firstName} ${updatedCharacter.nickName} ${updatedCharacter.lastName} has been updated.`,
+      );
+
+      return;
+    }
+
+    // ADD MODE:
+
+    // Generate the next available ID:
     const nextId =
       Math.max(0, ...this.characterService.charactersList().map((character) => character.id)) + 1;
 
@@ -122,7 +199,7 @@ export class CharacterForm {
       nickName: formValue.nickName!,
       lastName: formValue.lastName!,
       quote: formValue.quote!,
-      age: formValue.age!,
+      age: formValue.age === '' ? undefined : Number(formValue.age),
       gender: formValue.gender!,
       played_by: formValue.played_by!,
       character_type: formValue.character_type!,
@@ -134,31 +211,15 @@ export class CharacterForm {
     // Add the new character to the service:
     this.characterService.addCharacter(newCharacter);
 
-    // Reset the form & navigate to the details:
-    this.onReset();
-    this.router.navigate(['/characters/' + nextId]);
+    // Reset the form:
+    this.characterForm.reset();
 
-    // Console the change -- Might change this to effect() or something later:
+    // Navigate to the new character's details:
+    this.router.navigate(['/characters', nextId, 'view']);
+
     console.log(
       `Character ${newCharacter.firstName} ${newCharacter.nickName} ${newCharacter.lastName} has been added.`,
     );
-  }
-
-  // Reset the form:
-  protected onReset(): void {
-    this.characterForm.reset({
-      firstName: '',
-      nickName: '',
-      lastName: '',
-      quote: '',
-      age: '',
-      gender: '',
-      played_by: '',
-      character_type: '',
-      description: '',
-      imageLink: null,
-      status: null,
-    });
   }
 
   // Error Message:
@@ -178,8 +239,7 @@ export class CharacterForm {
 
   // CUSTOM VALIDATORS:
 
-  // Reject null (default value for status) as input.
-  statusRequired(control: AbstractControl): ValidationErrors | null {
+  protected statusRequired(control: AbstractControl): ValidationErrors | null {
     return control.value === null ? { required: true } : null;
   }
 

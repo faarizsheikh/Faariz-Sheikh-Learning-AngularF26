@@ -74,7 +74,7 @@
     <div class="card-footer">
       <button class="back-btn" routerLink="/characters">Back</button>
       <button class="toggle-btn" (click)="toggleStat()">Status</button>
-      <button class="edit-btn" [disabled]="true">Coming Soon</button>
+      <button class="edit-btn" [routerLink]="['/characters', c.id, 'edit']">Edit</button>
     </div>
   } @else {
     <div class="empty-list">
