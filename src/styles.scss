@@ -77,6 +77,23 @@ blockquote {
   }
 }
 
+input:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+
+}
+
+input[type='checkbox'] {
+  color: white;
+  display: inline;
+  max-width: 25px;
+  max-height: 25px;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  margin-block: 1.5rem 3.5rem;
+}
+
 // Button styling:
 button {
   color: #e8dddd;
@@ -94,8 +111,6 @@ button {
 
   &:disabled {
     background-color: #444 !important;
-    cursor: not-allowed;
-    opacity: 0.6;
   }
 
   // Add Button Styling:

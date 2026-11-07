@@ -68,9 +68,10 @@ export class CharacterService {
         'and you will all live to ' +
         'grow and thrive and lead *happy* lives, ' +
         'until old age takes you back to the weeds.',
-      age: 'Unknown',
+      age: undefined,
       gender: 'Unknown',
       // gender: 'She (True physical); IT (Cosmetic).',
+      status: undefined,
       played_by: 'Bill Skarsgård',
       character_type: 'Antagonist',
       description:
