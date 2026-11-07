@@ -3,10 +3,10 @@
 export interface ExtraInfo {
   nickName?: string;
   quote?: string;
-  age?: number | string;
+  age?: number;
   description?: string;
   imageLink?: string;
-  status?: boolean;
+  status: boolean | null | undefined;
 }
 
 export interface Character extends ExtraInfo {

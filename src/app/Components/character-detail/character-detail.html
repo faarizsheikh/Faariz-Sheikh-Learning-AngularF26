@@ -19,7 +19,7 @@
     <div class="card-body">
       <blockquote [class]="c.quote ? 'quote' : 'no-quote'">{{ c.quote }}</blockquote>
 
-      <p class="age"><strong>Age:</strong>{{ c.age ? c.age : 'Unknown' }}</p>
+      <p class="age"><strong>Age:</strong>{{ c.age ?? 'Unknown' }}</p>
       <p class="gender"><strong>Gender:</strong>{{ c.gender }}</p>
       <p class="played_by"><strong>Played by:</strong>{{ c.played_by }}</p>
 

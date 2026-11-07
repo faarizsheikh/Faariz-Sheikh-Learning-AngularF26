@@ -93,13 +93,24 @@
 
         <input
           id="age"
-          type="text"
+          type="number"
           formControlName="age"
           placeholder="Enter character's age."
           [min]="ageMinL"
           [max]="ageMaxL"
           [step]="ageStep"
+          (input)="onAgeInput()"
         />
+
+        <label for="ageUnknown">
+          <input
+            id="ageUnknown"
+            type="checkbox"
+            formControlName="ageUnknown"
+            (change)="onAgeUnknownChange($event)"
+          />
+          Age Unknown
+        </label>
 
         <div class="error yrs">
           <p class="error">

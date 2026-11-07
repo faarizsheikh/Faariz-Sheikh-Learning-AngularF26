@@ -108,7 +108,8 @@ export class CharacterForm implements OnInit {
         ],
       ],
 
-      age: ['', [Validators.min(this.ageMinL), Validators.max(this.ageMaxL), this.noWhitespace]],
+      age: ['', [Validators.required, Validators.min(this.ageMinL), Validators.max(this.ageMaxL)]],
+      ageUnknown: [this.fb.nonNullable.control(false)],
 
       gender: ['', Validators.required],
 
@@ -151,19 +152,23 @@ export class CharacterForm implements OnInit {
       const character = this.characterService.getCharacter(Number(id));
 
       if (character) {
+        console.log('Character being edited:', character);
+        console.log('Character age:', character.age);
         this.characterForm.patchValue({
           firstName: character.firstName,
           nickName: character.nickName ?? '',
           lastName: character.lastName,
           quote: character.quote ?? '',
-          age: character.age == null ? '' : String(character.age),
+          age: character.age == undefined ? '' : String(character.age),
           gender: character.gender,
           played_by: character.played_by,
           character_type: character.character_type,
           description: character.description ?? '',
           imageLink: character.imageLink ?? '',
-          status: character.status ?? null,
+          status: character.status,
         });
+        this.characterForm.controls.ageUnknown.setValue(character.age === undefined);
+        this.updateAgeControls();
       } else {
         this.router.navigate(['/characters']);
       }
@@ -196,7 +201,11 @@ export class CharacterForm implements OnInit {
         nickName: formValue.nickName!,
         lastName: formValue.lastName!,
         quote: formValue.quote!,
-        age: formValue.age === '' ? undefined : Number(formValue.age),
+        age: formValue.ageUnknown
+          ? undefined
+          : formValue.age === '' || formValue.age == null
+            ? undefined
+            : Number(formValue.age),
         gender: formValue.gender!,
         played_by: formValue.played_by!,
         character_type: formValue.character_type!,
@@ -231,7 +240,11 @@ export class CharacterForm implements OnInit {
       nickName: formValue.nickName!,
       lastName: formValue.lastName!,
       quote: formValue.quote!,
-      age: formValue.age === '' ? undefined : Number(formValue.age),
+      age: formValue.ageUnknown
+        ? undefined
+        : formValue.age === '' || formValue.age == null
+          ? undefined
+          : Number(formValue.age),
       gender: formValue.gender!,
       played_by: formValue.played_by!,
       character_type: formValue.character_type!,
@@ -276,13 +289,14 @@ export class CharacterForm implements OnInit {
     return control.value === null ? { required: true } : null;
   }
 
+  // Check for Only Whitespaces:
   protected noWhitespace(control: AbstractControl): ValidationErrors | null {
     return typeof control.value === 'string' && control.value.trim().length === 0
       ? { whitespace: true }
       : null;
   }
 
-  // CUSTOM CROSS-FIELD VALIDATOR:
+  // Check for firstName and lastName being identical:
   protected diffNames(control: AbstractControl): ValidationErrors | null {
     const firstName = control.get('firstName')?.value;
     const lastName = control.get('lastName')?.value;
@@ -299,6 +313,51 @@ export class CharacterForm implements OnInit {
     return firstName.trim().toLowerCase() === lastName.trim().toLowerCase()
       ? { duplicateName: true }
       : null;
+  }
+
+  private updateAgeControls(): void {
+    const age = this.characterForm.controls.age;
+    const ageUnknown = this.characterForm.controls.ageUnknown;
+
+    if (ageUnknown.value) {
+      age.disable({ emitEvent: false });
+      ageUnknown.enable({ emitEvent: false });
+    } else if (age.value !== '' && age.value !== null) {
+      age.enable({ emitEvent: false });
+      ageUnknown.disable({ emitEvent: false });
+    } else {
+      age.enable({ emitEvent: false });
+      ageUnknown.enable({ emitEvent: false });
+    }
+  }
+
+  // Handle changes to the age input:
+  protected onAgeInput(): void {
+    const age = this.characterForm.controls.age;
+    const ageUnknown = this.characterForm.controls.ageUnknown;
+
+    if (age.value !== '' && age.value !== null) {
+      ageUnknown.disable();
+    } else {
+      ageUnknown.enable();
+    }
+  }
+
+  // Handle the Age Unknown checkbox:
+  protected onAgeUnknownChange(event: Event): void {
+    const checked = (event.target as HTMLInputElement).checked;
+
+    const age = this.characterForm.controls.age;
+    const ageUnknown = this.characterForm.controls.ageUnknown;
+
+    ageUnknown.setValue(checked);
+
+    if (checked) {
+      age.setValue('');
+      age.disable();
+    } else {
+      age.enable();
+    }
   }
 
   protected readonly isFormControl = isFormControl;
