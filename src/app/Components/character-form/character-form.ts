@@ -68,50 +68,80 @@ export class CharacterForm implements OnInit {
   ];
 
   // CHARACTER FORM:
-  characterForm = this.fb.group({
-    firstName: [
-      '',
-      [
-        Validators.required,
-        Validators.minLength(this.nameMinL),
-        Validators.maxLength(this.nameMaxL),
+  characterForm = this.fb.group(
+    {
+      firstName: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(this.nameMinL),
+          Validators.maxLength(this.nameMaxL),
+          this.noWhitespace,
+        ],
       ],
-    ],
 
-    nickName: ['', [Validators.minLength(this.nameMinL), Validators.maxLength(this.nameMaxL)]],
-
-    lastName: [
-      '',
-      [
-        Validators.required,
-        Validators.minLength(this.nameMinL),
-        Validators.maxLength(this.nameMaxL),
+      nickName: [
+        '',
+        [
+          Validators.minLength(this.nameMinL),
+          Validators.maxLength(this.nameMaxL),
+          this.noWhitespace,
+        ],
       ],
-    ],
 
-    quote: ['', [Validators.minLength(this.quoteMinL), Validators.maxLength(this.quoteMaxL)]],
-
-    age: ['', [Validators.min(this.ageMinL), Validators.max(this.ageMaxL)]],
-
-    gender: ['', Validators.required],
-
-    played_by: [
-      '',
-      [
-        Validators.required,
-        Validators.minLength(this.actorMinL),
-        Validators.maxLength(this.actorMaxL),
+      lastName: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(this.nameMinL),
+          Validators.maxLength(this.nameMaxL),
+          this.noWhitespace,
+        ],
       ],
-    ],
 
-    character_type: ['', Validators.required],
+      quote: [
+        '',
+        [
+          Validators.minLength(this.quoteMinL),
+          Validators.maxLength(this.quoteMaxL),
+          this.noWhitespace,
+        ],
+      ],
 
-    description: ['', [Validators.minLength(this.descMinL), Validators.maxLength(this.descMaxL)]],
+      age: ['', [Validators.min(this.ageMinL), Validators.max(this.ageMaxL), this.noWhitespace]],
 
-    imageLink: ['', [Validators.minLength(this.imgMinL), Validators.maxLength(this.imgMaxL)]],
+      gender: ['', Validators.required],
 
-    status: this.fb.control<boolean | null | undefined>(null, this.statusRequired),
-  });
+      played_by: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(this.actorMinL),
+          Validators.maxLength(this.actorMaxL),
+          this.noWhitespace,
+        ],
+      ],
+
+      character_type: ['', Validators.required],
+
+      description: [
+        '',
+        [
+          Validators.minLength(this.descMinL),
+          Validators.maxLength(this.descMaxL),
+          this.noWhitespace,
+        ],
+      ],
+
+      imageLink: [
+        '',
+        [Validators.minLength(this.imgMinL), Validators.maxLength(this.imgMaxL), this.noWhitespace],
+      ],
+
+      status: this.fb.control<boolean | null | undefined>(null, this.statusRequired),
+    },
+    { validators: this.diffNames },
+  );
 
   // Load an existing character when editing:
   ngOnInit(): void {
@@ -236,13 +266,39 @@ export class CharacterForm implements OnInit {
           ? `${fieldName} must be between ${minL} and ${maxL} characters.`
           : control.hasError('min') || control.hasError('max')
             ? `${fieldName} must be between ${minL} and ${maxL}.`
-            : '';
+            : control.hasError('whitespace')
+              ? `${fieldName} cannot contain only whitespaces.`
+              : '';
   }
 
   // CUSTOM VALIDATORS:
-
   protected statusRequired(control: AbstractControl): ValidationErrors | null {
     return control.value === null ? { required: true } : null;
+  }
+
+  protected noWhitespace(control: AbstractControl): ValidationErrors | null {
+    return typeof control.value === 'string' && control.value.trim().length === 0
+      ? { whitespace: true }
+      : null;
+  }
+
+  // CUSTOM CROSS-FIELD VALIDATOR:
+  protected diffNames(control: AbstractControl): ValidationErrors | null {
+    const firstName = control.get('firstName')?.value;
+    const lastName = control.get('lastName')?.value;
+
+    if (
+      typeof firstName !== 'string' ||
+      typeof lastName !== 'string' ||
+      !firstName.trim() ||
+      !lastName.trim()
+    ) {
+      return null;
+    }
+
+    return firstName.trim().toLowerCase() === lastName.trim().toLowerCase()
+      ? { duplicateName: true }
+      : null;
   }
 
   protected readonly isFormControl = isFormControl;

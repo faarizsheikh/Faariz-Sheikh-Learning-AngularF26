@@ -7,6 +7,15 @@
 
   <div class="card-body">
     <form [formGroup]="characterForm" (ngSubmit)="onSubmit()">
+      @if (
+        characterForm.hasError('duplicateName') &&
+        (characterForm.controls.firstName.touched || characterForm.controls.lastName.touched)
+      ) {
+        <div class="error identical">
+          <p class="error">First name and last name cannot be identical.</p>
+        </div>
+      }
+
       <!-- FIRST NAME FIELD: -->
       <div class="form-group">
         <label for="first-name">First Name:</label>
@@ -197,7 +206,9 @@
         </select>
 
         <div class="error status">
-          {{ errMsg('status', "Character's status") }}
+          <p class="error">
+            {{ errMsg('status', "Character's status") }}
+          </p>
         </div>
       </div>
 
