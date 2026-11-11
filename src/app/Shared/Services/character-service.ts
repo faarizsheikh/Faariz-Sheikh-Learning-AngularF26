@@ -200,7 +200,7 @@ export class CharacterService {
       age: 13,
       gender: 'Male',
       status: true,
-      played_by: 'Jeremy Dylan Taylor',
+      played_by: 'Jeremy Ray Taylor',
       character_type: 'Supporting Character',
       description:
         'Benjamin Hanscom is a new kid ' +
