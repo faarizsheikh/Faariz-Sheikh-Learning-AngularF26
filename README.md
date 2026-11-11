@@ -57,3 +57,35 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## API – The Movie Database (TMDB)
+
+This project uses the **TMDB API v3** to retrieve cast and character information for *IT (2017)*.
+
+**API Documentation:** https://developer.themoviedb.org/reference/movie-credits
+
+**API Base URL:** `https://api.themoviedb.org/3`
+
+**Example Request:**
+
+```text
+https://api.themoviedb.org/3/movie/346364/credits?api_key=YOUR_TMDB_V3_API_KEY&language=en-US
+```
+
+**Response Structure:**
+
+The API returns a JSON object containing `id`, `cast`, and `crew`. The application will use the `cast` array to retrieve character and actor information.
+
+**Fields to be used:**
+- `credit_id`
+- `id`
+- `name`
+- `character`
+- `profile_path`
+- `order`
+
+**Authentication:** A free TMDB API v3 key is required.
+
+**Attribution:**
+
+This product uses the TMDB API but is not endorsed or certified by TMDB.

@@ -15,7 +15,7 @@ export const appConfig: ApplicationConfig = {
       provide: APP_CONFIG, // Identifies token.
       useValue: {
         // Tells Angular to provide this exact configuration object:
-        apiBaseUrl: 'https://placeholder.example.com/api',
+        apiBaseUrl: 'https://api.themoviedb.org/3',
         defaultCategory: 'all',
       },
     },
