@@ -17,7 +17,7 @@ export class CharacterDetail {
 
   // Find the matching character; recalculate if id changes:
   character = computed(() =>
-    this.characterService.charactersList().find((c) => c.id === Number(this.id())),
+    this.characterService.charactersList().find((c) => c.id === this.id()),
   );
 
   // Change the character status:

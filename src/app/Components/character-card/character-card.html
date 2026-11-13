@@ -4,16 +4,21 @@
   <div class="card-header">
     @if (isFirst() || isLast()) {
       <p [class]="'count-lbl ' + (isFirst() ? 'first-lbl' : 'last-lbl')">
-        {{ character().id }}
+        {{ isFirst() ? 'First' : 'Last' }}
       </p>
     }
 
     <h3 class="name">
       @if (character().firstName.length >= 10 || character().lastName.length >= 10) {
-        <span class="longer">{{ character().firstName }}<br />{{ character().lastName }}</span>
+        <span class="longer"> {{ character().firstName }}<br />{{ character().lastName }} </span>
       } @else {
         <span class="shorter">
-          {{ character().firstName }} "{{ character().nickName }}" {{ character().lastName }}
+          {{
+            character().nickName
+              ? character().firstName + ' "' + character().nickName + '"'
+              : character().firstName
+          }}
+          {{ character().lastName }}
         </span>
       }
     </h3>
@@ -36,8 +41,12 @@
           <span class="badge catalyst">Catalyst</span>
         }
 
-        @default {
+        @case ('Supporting Character') {
           <span class="badge supporting">Supporting Character</span>
+        }
+
+        @case ('Unknown') {
+          <span class="badge unknown">Unknown</span>
         }
       }
     </p>

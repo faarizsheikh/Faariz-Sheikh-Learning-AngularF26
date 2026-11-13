@@ -16,6 +16,15 @@
         </div>
       }
 
+      @if (
+        characterForm.hasError('duplicateChar') &&
+        (characterForm.controls.firstName.touched || characterForm.controls.lastName.touched)
+      ) {
+        <div class="error duplicate-character">
+          <p class="error">A character with this first and last name already exists.</p>
+        </div>
+      }
+
       <!-- FIRST NAME FIELD: -->
       <div class="form-group">
         <label for="first-name">First Name:</label>

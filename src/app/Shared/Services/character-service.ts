@@ -16,7 +16,7 @@ export class CharacterService {
 
   private characters = signal<Character[]>([
     {
-      id: 1,
+      id: '1',
       firstName: 'Billy',
       nickName: 'Bill',
       lastName: 'Denbrough',
@@ -39,7 +39,7 @@ export class CharacterService {
       imageLink: '../../Assets/character-images/bill-den.png',
     },
     {
-      id: 2,
+      id: '2',
       firstName: 'George',
       nickName: 'Georgie',
       lastName: 'Denbrough',
@@ -56,7 +56,7 @@ export class CharacterService {
       imageLink: '../../Assets/character-images/george-den.png',
     },
     {
-      id: 3,
+      id: '3',
       firstName: 'Deadlights',
       nickName: 'IT',
       lastName: 'Pennywise',
@@ -82,7 +82,7 @@ export class CharacterService {
       imageLink: '../../Assets/character-images/pw-clown.png',
     },
     {
-      id: 4,
+      id: '4',
       firstName: 'Rich',
       nickName: 'Richie',
       lastName: 'Tozier',
@@ -107,7 +107,7 @@ export class CharacterService {
       imageLink: '../../Assets/character-images/rich-toz.png',
     },
     {
-      id: 5,
+      id: '5',
       firstName: 'Stanley',
       nickName: 'Stan',
       lastName: 'Uris',
@@ -124,7 +124,7 @@ export class CharacterService {
       imageLink: '../../Assets/character-images/stan-ur.png',
     },
     {
-      id: 6,
+      id: '6',
       firstName: 'Eddie',
       nickName: 'Edds',
       lastName: 'Kaspbrak',
@@ -144,7 +144,7 @@ export class CharacterService {
       imageLink: '../../Assets/character-images/eds-k.png',
     },
     {
-      id: 7,
+      id: '7',
       firstName: 'Beverly',
       nickName: 'Bev',
       lastName: 'Marsh',
@@ -168,7 +168,7 @@ export class CharacterService {
       imageLink: '../../Assets/character-images/bev-marsh.png',
     },
     {
-      id: 8,
+      id: '8',
       firstName: 'Michael',
       nickName: 'Mike',
       lastName: 'Hanlon',
@@ -189,7 +189,7 @@ export class CharacterService {
       imageLink: '../../Assets/character-images/mike-han.png',
     },
     {
-      id: 9,
+      id: '9',
       firstName: 'Benjamin',
       nickName: 'Ben',
       lastName: 'Hanscom',
@@ -229,11 +229,11 @@ export class CharacterService {
   readonly aliveCharacterCount = computed(() => this.aliveCharacters().length);
 
   // Methods related to retrieving a character using its id:
-  getCharacter(id: number): Character | undefined {
+  getCharacter(id: string): Character | undefined {
     return this.getById(id);
   }
 
-  getById(id: number): Character | undefined {
+  getById(id: string): Character | undefined {
     return this.characters().find((character) => character.id === id);
   }
 
@@ -250,12 +250,12 @@ export class CharacterService {
   }
 
   // Method to create a new array list and exclude the removed character:
-  removeCharacter(id: number): void {
+  removeCharacter(id: string): void {
     this.characters.update((list) => list.filter((character) => character.id !== id));
   }
 
   // Method to create a new array list and contain the updated status:
-  toggleStat(id: number, status: boolean | undefined): void {
+  toggleStat(id: string, status: boolean | undefined): void {
     this.characters.update((list) => {
       // Searches the array:
       const index = list.findIndex((character) => character.id === id);

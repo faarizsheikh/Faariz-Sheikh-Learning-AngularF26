@@ -58,6 +58,7 @@ export class CharacterForm implements OnInit {
     ['Antagonist', 'Antagonist'],
     ['Catalyst', 'Catalyst'],
     ['Supporting Character', 'Supporting Character'],
+    ['Unknown', 'Unknown'],
   ];
 
   stats: [boolean | null | undefined, string][] = [
@@ -141,7 +142,9 @@ export class CharacterForm implements OnInit {
 
       status: this.fb.control<boolean | null | undefined>(null, this.statusRequired),
     },
-    { validators: this.diffNames },
+    {
+      validators: [this.diffNames, this.uniqueChar.bind(this)],
+    },
   );
 
   // Load an existing character when editing:
@@ -149,7 +152,7 @@ export class CharacterForm implements OnInit {
     const id = this.id();
 
     if (id) {
-      const character = this.characterService.getCharacter(Number(id));
+      const character = this.characterService.getCharacter(id);
 
       if (character) {
         console.log('Character being edited:', character);
@@ -169,6 +172,7 @@ export class CharacterForm implements OnInit {
         });
         this.characterForm.controls.ageUnknown.setValue(character.age === undefined);
         this.updateAgeControls();
+        this.characterForm.updateValueAndValidity();
       } else {
         this.router.navigate(['/characters']);
       }
@@ -185,7 +189,7 @@ export class CharacterForm implements OnInit {
 
     // EDIT MODE:
     if (this.id()) {
-      const id = Number(this.id());
+      const id = this.id()!;
 
       const existingCharacter = this.characterService.getCharacter(id);
 
@@ -228,12 +232,11 @@ export class CharacterForm implements OnInit {
     }
 
     // Generate the next available ID:
-    const nextId =
-      Math.max(0, ...this.characterService.charactersList().map((character) => character.id)) + 1;
+    const newId = crypto.randomUUID();
 
     // Create a new character:
     const newCharacter: Character = {
-      id: nextId,
+      id: newId,
       firstName: formValue.firstName!,
       nickName: formValue.nickName!,
       lastName: formValue.lastName!,
@@ -258,7 +261,7 @@ export class CharacterForm implements OnInit {
     this.characterForm.reset();
 
     // Navigate to the new character's details:
-    this.router.navigate(['/characters', nextId, 'view']);
+    this.router.navigate(['/characters', newId, 'view']);
 
     console.log(
       `Character ${newCharacter.firstName} ${newCharacter.nickName} ${newCharacter.lastName} has been added.`,
@@ -290,9 +293,38 @@ export class CharacterForm implements OnInit {
 
   // Check for Only Whitespaces:
   protected noWhitespace(control: AbstractControl): ValidationErrors | null {
-    return typeof control.value === 'string' && control.value.trim().length === 0
+    return typeof control.value === 'string' &&
+      control.value.length > 0 &&
+      control.value.trim().length === 0
       ? { whitespace: true }
       : null;
+  }
+
+  protected uniqueChar(control: AbstractControl): ValidationErrors | null {
+    const firstName = control.get('firstName')?.value;
+    const lastName = control.get('lastName')?.value;
+
+    if (
+      typeof firstName !== 'string' ||
+      typeof lastName !== 'string' ||
+      !firstName.trim() ||
+      !lastName.trim()
+    ) {
+      return null;
+    }
+
+    const fix = (name: string) => name.trim().replace(/\s+/g, ' ').toLowerCase();
+
+    const currentId = this.id();
+
+    const duplicate = this.characterService.charactersList().some((character) => {
+      const sameName =
+        fix(character.firstName) === fix(firstName) && fix(character.lastName) === fix(lastName);
+
+      return sameName && character.id !== currentId;
+    });
+
+    return duplicate ? { duplicateChar: true } : null;
   }
 
   // Check for firstName and lastName being identical:

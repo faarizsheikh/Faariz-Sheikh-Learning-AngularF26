@@ -77,11 +77,9 @@ https://api.themoviedb.org/3/movie/346364/credits?api_key=YOUR_TMDB_V3_API_KEY&l
 The API returns a JSON object containing three top-level properties: `id`, `cast`, and `crew`. The `id` represents the movie id, while `cast` and `crew` are arrays containing cast and crew information, respectively.
 
 **Fields to be used:**
-- `credit_id` - Cast credit identifier.
 - `id` - Actor id.
 - `name` - Actor's name.
 - `character` - Character's name.
-- `profile_path` - Actor or character's profile image path.
 - `order` - Cast billing order.
 
 **Authentication:** A free TMDB API v3 key is required.

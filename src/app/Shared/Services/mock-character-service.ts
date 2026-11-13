@@ -9,7 +9,7 @@ import { Character } from '../Models/character-data';
 export class MockCharacterService {
   private characters = signal<Character[]>([
     {
-      id: 101,
+      id: '101',
       firstName: 'MOCK',
       nickName: 'CHARACTER',
       lastName: 'ONE',
@@ -23,7 +23,7 @@ export class MockCharacterService {
       imageLink: '../../Assets/mock-character-images/mock-character-one.png',
     },
     {
-      id: 102,
+      id: '102',
       firstName: 'MOCK',
       nickName: 'CHARACTER',
       lastName: 'TWO',
@@ -54,11 +54,11 @@ export class MockCharacterService {
 
   readonly aliveCharacterCount = computed(() => this.aliveCharacters().length);
 
-  getCharacter(id: number): Character | undefined {
+  getCharacter(id: string): Character | undefined {
     return this.getById(id);
   }
 
-  getById(id: number): Character | undefined {
+  getById(id: string): Character | undefined {
     return this.characters().find((character) => character.id === id);
   }
 
@@ -66,7 +66,7 @@ export class MockCharacterService {
     this.characters.update((list) => [...list, character]);
   }
 
-  removeCharacter(id: number): void {
+  removeCharacter(id: string): void {
     this.characters.update((list) => list.filter((character) => character.id !== id));
   }
 
@@ -76,7 +76,7 @@ export class MockCharacterService {
     );
   }
 
-  toggleStat(id: number, status: boolean | undefined): void {
+  toggleStat(id: string, status: boolean | undefined): void {
     this.characters.update((list) => {
       const index = list.findIndex((character) => character.id === id);
 

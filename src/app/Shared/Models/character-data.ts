@@ -10,7 +10,7 @@ export interface ExtraInfo {
 }
 
 export interface Character extends ExtraInfo {
-  id: number;
+  id: string;
   firstName: string;
   lastName: string;
   gender: string;
