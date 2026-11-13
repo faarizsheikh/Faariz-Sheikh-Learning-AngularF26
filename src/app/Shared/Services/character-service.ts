@@ -1,19 +1,25 @@
 // CHARACTER SERVICE (character-service.ts):
 
+import { map } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { Injectable, computed, effect, inject, signal } from '@angular/core';
 import { APP_CONFIG } from '../Config/app-config';
-import { Character } from '../Models/character-data';
+import { mapTMDBCreditsResponse } from '../Mappers/tmdb-character-mapper';
+import type { Character } from '../Models/character-data';
+import type { TMDBCreditsResponse } from '../Models/tmdb-credits-data';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CharacterService {
-  // Asks Angular's injector for the value registered in app.config.ts:
+  // Dependency Injection:
+  private http = inject(HttpClient);
   private config = inject(APP_CONFIG);
 
-  // Reads the actual URL from that injected configuration:
+  // API base URL:
   readonly apiBaseUrl = this.config.apiBaseUrl;
 
+  // Existing writable signal:
   private characters = signal<Character[]>([
     {
       id: '1',
@@ -70,7 +76,6 @@ export class CharacterService {
         'until old age takes you back to the weeds.',
       age: undefined,
       gender: 'Unknown',
-      // gender: 'She (True physical); IT (Cosmetic).',
       status: undefined,
       played_by: 'Bill Skarsgård',
       character_type: 'Antagonist',
@@ -210,25 +215,64 @@ export class CharacterService {
     },
   ]);
 
-  // Effect reacts to the character count change:
+  // Loading and error signals:
+  readonly isLoading = signal(true);
+  readonly error = signal<string | null>(null);
+
   constructor() {
+    // Effect reacts to the character count change:
     effect(() => {
       console.log(`Character count: ${this.characters().length}`);
     });
+
+    // Load characters from TMDB:
+    this.loadCharacters();
   }
 
-  // Read-only version of the data array signal for components to consume:
+  // Load characters from the API:
+  loadCharacters(): void {
+    this.isLoading.set(true);
+    this.error.set(null);
+
+    // Sends a GET request to the config Api Base URL:
+    this.http
+      .get<TMDBCreditsResponse>(`${this.config.apiBaseUrl}/movie/346364/credits`, {
+        params: {
+          api_key: this.config.tmdbApiKey,
+        },
+      })
+      .pipe(
+        // Convert the API response into our Character array, sorting them all by billing order.
+        map((response) => mapTMDBCreditsResponse(response)),
+      )
+      .subscribe({
+        next: (characters) => {
+          this.characters.set(characters);
+          this.isLoading.set(false);
+        },
+
+        error: (err: unknown) => {
+          console.error('TMDB request failed:', err);
+
+          this.error.set('Could not load characters. Please check your connection and try again.');
+
+          this.isLoading.set(false);
+        },
+      });
+  }
+
+  // Read-only version of the character array:
   readonly charactersList = this.characters.asReadonly();
 
-  // Creates a filter array list only containing alive characters:
+  // Filter only alive characters:
   readonly aliveCharacters = computed(() =>
     this.characters().filter((character) => character.status === true),
   );
 
-  // Count for number of alive characters:
+  // Count alive characters:
   readonly aliveCharacterCount = computed(() => this.aliveCharacters().length);
 
-  // Methods related to retrieving a character using its id:
+  // Retrieve a character:
   getCharacter(id: string): Character | undefined {
     return this.getById(id);
   }
@@ -237,39 +281,36 @@ export class CharacterService {
     return this.characters().find((character) => character.id === id);
   }
 
-  // Method to add a new character and include it in a new array list containing both old and new ones:
+  // Add a character:
   addCharacter(character: Character): void {
     this.characters.update((list) => [...list, character]);
   }
 
-  // Method to update an existing character:
+  // Update a character:
   updateCharacter(updated: Character): void {
     this.characters.update((list) =>
       list.map((character) => (character.id === updated.id ? updated : character)),
     );
   }
 
-  // Method to create a new array list and exclude the removed character:
+  // Remove a character:
   removeCharacter(id: string): void {
     this.characters.update((list) => list.filter((character) => character.id !== id));
   }
 
-  // Method to create a new array list and contain the updated status:
+  // Toggle character status:
   toggleStat(id: string, status: boolean | undefined): void {
     this.characters.update((list) => {
-      // Searches the array:
       const index = list.findIndex((character) => character.id === id);
 
       if (index === -1) return list;
 
-      // Creates a duplicate array of the data array:
       const updated = [...list];
 
-      // Create a new object of the new array containing the updated status - To avoid modifying the existing object:
       updated[index] = {
         ...updated[index],
         status,
-      }; // Avoids, mutation.
+      };
 
       return updated;
     });

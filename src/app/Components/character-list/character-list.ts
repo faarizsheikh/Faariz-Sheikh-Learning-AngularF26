@@ -18,6 +18,15 @@ export class CharacterList {
   characters = this.charactersService.charactersList;
   dataSource = this.charactersService.apiBaseUrl;
 
+  // Loading and error signals:
+  isLoading = this.charactersService.isLoading;
+  error = this.charactersService.error;
+
+  // Retry loading characters:
+  retryLoad(): void {
+    this.charactersService.loadCharacters();
+  }
+
   // Function to remove an item in the list and console a message about it:
   handleRemove(event: removeEvent): void {
     this.charactersService.removeCharacter(event.id);

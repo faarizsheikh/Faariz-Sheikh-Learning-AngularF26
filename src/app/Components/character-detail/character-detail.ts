@@ -15,6 +15,9 @@ export class CharacterDetail {
   id = input.required<string>(); // Receives the route parameter.
   private characterService = inject(CharacterService);
 
+  isLoading = this.characterService.isLoading;
+  error = this.characterService.error;
+
   // Find the matching character; recalculate if id changes:
   character = computed(() =>
     this.characterService.charactersList().find((c) => c.id === this.id()),

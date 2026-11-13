@@ -87,3 +87,13 @@ The API returns a JSON object containing three top-level properties: `id`, `cast
 **Attribution:**
 
 This product uses the TMDB API but is not endorsed or certified by TMDB.
+
+
+### Loading API Data
+
+The application uses Angular's HttpClient to retrieve character credits from TMDB. The API response contains a cast array inside an object, so RxJS map and mapTMDBCreditsResponse transform the response into the application's Character model before updating the existing writable signal. I chose HttpClient because it is supported in Angular 21 and integrates directly with the existing signal-based CRUD operations.
+
+
+### Local Data Changes
+
+Adding, editing, and deleting characters only modifies the application's in-memory signal. There are no POST, PUT, PATCH, or DELETE requests sent to TMDB. Refreshing the page would reload the original API data because the local changes are not saved to the server.

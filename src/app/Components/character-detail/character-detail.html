@@ -1,7 +1,18 @@
 <!-- CHARACTER DETAIL COMPONENT TEMPLATE (character-detail.component.html): -->
 
 <div class="character-card">
-  @if (character(); as c) {
+  @if (isLoading()) {
+    <div class="loading">
+      <h3>Loading character...</h3>
+    </div>
+  } @else if (error()) {
+    <div class="error">
+      <h3>Unable to load character.</h3>
+      <p>{{ error() }}</p>
+
+      <button class="back-btn" routerLink="/characters">Back</button>
+    </div>
+  } @else if (character(); as c) {
     <div class="card-header">
       <h3 class="name">{{ c.firstName }} "{{ c.nickName }}" {{ c.lastName }}</h3>
 
@@ -11,8 +22,8 @@
         height="485"
         priority="true"
         [ngSrc]="c.imageLink || 'Assets/no-img.png'"
-        [alt]="'c.firstName ' + 'c.lastName'"
-        [title]="'c.firstName ' + 'c.lastName'"
+        [alt]="c.firstName + ' ' + c.lastName"
+        [title]="c.firstName + ' ' + c.lastName"
       />
     </div>
 
@@ -28,23 +39,18 @@
           @case ('Protagonist') {
             <span class="badge protagonist">Protagonist</span>
           }
-
           @case ('Co-Protagonist') {
             <span class="badge co-protagonist">Co-Protagonist</span>
           }
-
           @case ('Antagonist') {
             <span class="badge antagonist">Antagonist</span>
           }
-
           @case ('Catalyst') {
             <span class="badge catalyst">Catalyst</span>
           }
-
           @case ('Supporting Character') {
             <span class="badge supporting">Supporting Character</span>
           }
-
           @case ('Unknown') {
             <span class="badge unknown">Unknown</span>
           }

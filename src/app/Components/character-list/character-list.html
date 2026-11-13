@@ -7,42 +7,60 @@
     <i>Data source: {{ dataSource }}.</i>
   </p>
 
-  @for (
-    character of characters();
-    track character.id;
-    let even = $even, odd = $odd, count = $count, first = $first, last = $last
-  ) {
-    @if (first) {
-      <div class="count-container">
-        <p class="character-count">There are {{ count }} items found.</p>
-        <p class="alive-count">Alive Characters: {{ aliveCharacterCount() }}</p>
-      </div>
+  <p class="local-changes-note">
+    Changes are saved locally for this session only. Refreshing restores the original API data.
+  </p>
 
-      <div class="separator"></div>
-      <button class="add-btn" routerLink="/characters/add">Add</button>
-    }
-    <app-character-card
-      [character]="character"
-      [class.even]="even"
-      [class.odd]="odd"
-      [class.first]="first"
-      [class.last]="last"
-      [isFirst]="first"
-      [isLast]="last"
-      (removeEvent)="handleRemove($event)"
-    ></app-character-card>
-
-    @if (last) {
-      <p>This is the end of list.</p>
-    }
-  } @empty {
+  @if (isLoading()) {
+    <p>Loading characters...</p>
+  } @else if (error()) {
     <div class="empty-list">
-      <h3>No characters are currently available.</h3>
+      <h3>Unable to load characters.</h3>
 
       <div class="content">
-        <p>Please add at least one character to the list.</p>
-        <p>(The ability to add characters is coming soon.)</p>
+        <p>{{ error() }}</p>
+
+        <button class="add-btn" (click)="retryLoad()">Try Again</button>
       </div>
     </div>
+  } @else {
+    <div class="count-container">
+      <p class="character-count">There are {{ characters().length }} items found.</p>
+
+      <p class="alive-count">Alive Characters: {{ aliveCharacterCount() }}</p>
+    </div>
+
+    <div class="separator"></div>
+
+    <button class="add-btn" routerLink="/characters/add">Add</button>
+
+    @for (
+      character of characters();
+      track character.id;
+      let even = $even, odd = $odd, first = $first, last = $last
+    ) {
+      <app-character-card
+        [character]="character"
+        [class.even]="even"
+        [class.odd]="odd"
+        [class.first]="first"
+        [class.last]="last"
+        [isFirst]="first"
+        [isLast]="last"
+        (removeEvent)="handleRemove($event)"
+      ></app-character-card>
+
+      @if (last) {
+        <p>This is the end of list.</p>
+      }
+    } @empty {
+      <div class="empty-list">
+        <h3>No characters are currently available.</h3>
+
+        <div class="content">
+          <p>Please add at least one character to the list.</p>
+        </div>
+      </div>
+    }
   }
 </div>
