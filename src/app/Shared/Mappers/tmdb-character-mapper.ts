@@ -1,4 +1,4 @@
-// TMDB CHARACTER MAPPER (character-data.ts):
+// TMDB CHARACTER MAPPER (tmdb-character-mapper.ts):
 
 import type { Character } from '../Models/character-data';
 import type { TMDBCastMember, TMDBCreditsResponse } from '../Models/tmdb-credits-data';
