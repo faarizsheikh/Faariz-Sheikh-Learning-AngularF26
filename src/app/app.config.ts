@@ -2,7 +2,10 @@
 
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { APP_CONFIG, AppConfig } from './Shared/Config/app-config';
+import { errorInterceptor } from './Shared/Interceptors/error-interceptor';
+import { loadingInterceptor } from './Shared/Interceptors/loading-interceptor';
 import { CharacterService } from './Shared/Services/character-service';
 // import { MockCharacterService } from './Shared/Services/mock-character-service';
 import { routes } from './app.routes';
@@ -11,6 +14,8 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes, withComponentInputBinding()),
+    // Register HTTP interceptors:
+    provideHttpClient(withInterceptors([loadingInterceptor, errorInterceptor])),
     {
       provide: APP_CONFIG,
       useValue: {
@@ -21,8 +26,9 @@ export const appConfig: ApplicationConfig = {
     },
     {
       provide: CharacterService,
-
-      // Removing this will switch back to real data:
+      // Real service:
+      useClass: CharacterService,
+      // To switch to mock data instead:
       // useClass: MockCharacterService,
     },
   ],

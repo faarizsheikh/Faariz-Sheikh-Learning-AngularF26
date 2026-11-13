@@ -8,6 +8,47 @@
   border-radius: 0.8em;
   box-shadow: 0 0.4em 1.2em #4a1018;
 
+  /* GLOBAL ERROR BANNER: */
+  .global-error-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    padding: 12px 16px;
+    margin-bottom: 15px;
+
+    background-color: #4a1018;
+    border: 1px solid #c1121f;
+    border-radius: 8px;
+
+    color: #ffffff;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  /* DISMISS BUTTON: */
+  .dismiss-btn {
+    padding: 8px 14px;
+
+    background-color: #c1121f;
+    color: #ffffff;
+
+    border: none;
+    border-radius: 5px;
+
+    cursor: pointer;
+  }
+
+  /* LOADING INDICATOR: */
+  .loading-indicator {
+    color: #b8a45a;
+    font-weight: bold;
+    margin: 0;
+  }
+
   // NAVBAR STYLING:
   .navbar {
     background-color: #110f10;

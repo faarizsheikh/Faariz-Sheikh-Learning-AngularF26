@@ -1,10 +1,20 @@
 <!-- ROOT COMPONENT TEMPLATE (app.html): -->
 
 <div class="container">
+  <!-- GLOBAL ERROR BANNER: -->
+  @if (errorService.errorMessage(); as message) {
+    <div class="global-error-banner" role="alert">
+      <p>{{ message }}</p>
+
+      <button class="dismiss-btn" (click)="errorService.clearError()">Dismiss</button>
+    </div>
+  }
+
   <header>
     <h1>IT: Chapter One (2017)</h1>
 
     <nav class="navbar">
+      <!-- EDITING STATUS: -->
       <p>
         Editing:
         <strong>
@@ -15,6 +25,11 @@
       <button class="toggle-btn" (click)="editGuardService.toggleGuard()">
         {{ editGuardService.guardEnabled() ? 'Unlock' : 'Lock' }} Editing
       </button>
+
+      <!-- GLOBAL LOADING INDICATOR: -->
+      @if (loadingService.isLoading()) {
+        <p class="loading-indicator" role="status">Loading...</p>
+      }
     </nav>
   </header>
 
