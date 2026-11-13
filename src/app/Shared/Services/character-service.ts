@@ -215,6 +215,11 @@ export class CharacterService {
     },
   ]);
 
+  // Fix strings for matching characters and actors:
+  private fix(value: string): string {
+    return value.toLowerCase().replace(/[^a-z0-9]/g, '');
+  }
+
   // Loading and error signals:
   readonly isLoading = signal(true);
   readonly error = signal<string | null>(null);
@@ -234,7 +239,7 @@ export class CharacterService {
     this.isLoading.set(true);
     this.error.set(null);
 
-    // Sends a GET request to the config Api Base URL:
+    // Sends a GET request to the config API base URL:
     this.http
       .get<TMDBCreditsResponse>(`${this.config.apiBaseUrl}/movie/346364/credits`, {
         params: {
@@ -242,12 +247,52 @@ export class CharacterService {
         },
       })
       .pipe(
-        // Convert the API response into our Character array, sorting them all by billing order.
+        // Convert the API response into our Character array:
         map((response) => mapTMDBCreditsResponse(response)),
       )
       .subscribe({
-        next: (characters) => {
-          this.characters.set(characters);
+        next: (apiCharacters) => {
+          const existingCharacters = this.characters();
+
+          // Merge API data with existing custom character information:
+          const mergedCharacters = apiCharacters.map((apiCharacter) => {
+            const apiName = this.fix(`${apiCharacter.firstName}${apiCharacter.lastName}`);
+
+            const apiActor = this.fix(apiCharacter.played_by);
+
+            // Find the corresponding manually defined character:
+            const existingCharacter = existingCharacters.find((character) => {
+              const existingName = this.fix(`${character.firstName}${character.lastName}`);
+
+              const existingNickname = this.fix(`${character.nickName ?? ''}${character.lastName}`);
+
+              const existingActor = this.fix(character.played_by);
+
+              return (
+                apiName === existingName ||
+                apiName === existingNickname ||
+                existingActor.includes(apiActor) ||
+                apiActor.includes(existingActor)
+              );
+            });
+
+            // Preserve custom information while retaining the API ID:
+            return existingCharacter
+              ? {
+                  ...apiCharacter,
+                  nickName: existingCharacter.nickName,
+                  quote: existingCharacter.quote,
+                  age: existingCharacter.age,
+                  gender: existingCharacter.gender,
+                  status: existingCharacter.status,
+                  character_type: existingCharacter.character_type,
+                  description: existingCharacter.description,
+                  imageLink: existingCharacter.imageLink,
+                }
+              : apiCharacter;
+          });
+
+          this.characters.set(mergedCharacters);
           this.isLoading.set(false);
         },
 
