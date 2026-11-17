@@ -43,20 +43,20 @@
         </div>
       </div>
 
-      <!-- NICKNAME FIELD: -->
+      <!-- ALIAS FIELD: -->
       <div class="form-group">
-        <label for="nick-name">Nickname:</label>
+        <label for="alias">Alias:</label>
 
         <input
-          id="nick-name"
+          id="alias"
           type="text"
-          formControlName="nickName"
-          placeholder="Enter character's nickname."
+          formControlName="alias"
+          placeholder="Enter character's alias."
         />
 
         <div class="error nk-name">
           <p class="error">
-            {{ errMsg('nickName', "Character's nickname", nameMinL, nameMaxL) }}
+            {{ errMsg('alias', "Character's alias", nameMinL, nameMaxL) }}
           </p>
         </div>
       </div>

@@ -81,7 +81,7 @@ export class CharacterForm implements OnInit {
         ],
       ],
 
-      nickName: [
+      alias: [
         '',
         [
           Validators.minLength(this.nameMinL),
@@ -159,7 +159,7 @@ export class CharacterForm implements OnInit {
         console.log('Character age:', character.age);
         this.characterForm.patchValue({
           firstName: character.firstName,
-          nickName: character.nickName ?? '',
+          alias: character.alias ?? '',
           lastName: character.lastName,
           quote: character.quote ?? '',
           age: character.age == undefined ? '' : String(character.age),
@@ -202,7 +202,7 @@ export class CharacterForm implements OnInit {
       const updatedCharacter: Character = {
         id,
         firstName: formValue.firstName!,
-        nickName: formValue.nickName!,
+        alias: formValue.alias!,
         lastName: formValue.lastName!,
         quote: formValue.quote!,
         age: formValue.ageUnknown
@@ -225,7 +225,7 @@ export class CharacterForm implements OnInit {
       this.router.navigate(['/characters', id, 'view']);
 
       console.log(
-        `Character ${updatedCharacter.firstName} ${updatedCharacter.nickName} ${updatedCharacter.lastName} has been updated.`,
+        `Character ${updatedCharacter.firstName} ${updatedCharacter.alias} ${updatedCharacter.lastName} has been updated.`,
       );
 
       return;
@@ -238,7 +238,7 @@ export class CharacterForm implements OnInit {
     const newCharacter: Character = {
       id: newId,
       firstName: formValue.firstName!,
-      nickName: formValue.nickName!,
+      alias: formValue.alias!,
       lastName: formValue.lastName!,
       quote: formValue.quote!,
       age: formValue.ageUnknown
@@ -264,7 +264,7 @@ export class CharacterForm implements OnInit {
     this.router.navigate(['/characters', newId, 'view']);
 
     console.log(
-      `Character ${newCharacter.firstName} ${newCharacter.nickName} ${newCharacter.lastName} has been added.`,
+      `Character ${newCharacter.firstName} ${newCharacter.alias} ${newCharacter.lastName} has been added.`,
     );
   }
 

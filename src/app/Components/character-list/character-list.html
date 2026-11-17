@@ -25,9 +25,14 @@
     </div>
   } @else {
     <div class="count-container">
-      <p class="character-count">There are {{ characters().length }} items found.</p>
+      <p class="character-count">{{ characters().length | number: '1.0-0' }} items found.</p>
 
-      <p class="alive-count">Alive Characters: {{ aliveCharacterCount() }}</p>
+      <p class="alive-count">
+        Alive Characters: {{ aliveCharCount() | number: '1.0-0' }} ({{
+          aliveCharPercentage() | percent: '1.0-0'
+        }}
+        with known status)
+      </p>
     </div>
 
     <div class="separator"></div>

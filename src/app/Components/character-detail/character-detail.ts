@@ -1,12 +1,12 @@
 /* -- CHARACTER DETAIL COMPONENT CLASS (character-detail.component.ts): -- */
 
-import { NgOptimizedImage } from '@angular/common';
+import { DecimalPipe, NgOptimizedImage, TitleCasePipe } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
 import { CharacterService } from '../../Shared/Services/character-service';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [NgOptimizedImage, RouterLink],
+  imports: [NgOptimizedImage, RouterLink, TitleCasePipe, DecimalPipe],
   selector: 'app-character-detail',
   styleUrl: './character-detail.scss',
   templateUrl: './character-detail.html',

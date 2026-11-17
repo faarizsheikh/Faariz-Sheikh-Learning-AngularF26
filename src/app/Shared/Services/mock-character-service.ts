@@ -11,7 +11,7 @@ export class MockCharacterService {
     {
       id: '101',
       firstName: 'MOCK',
-      nickName: 'CHARACTER',
+      alias: 'CHARACTER',
       lastName: 'ONE',
       quote: 'I want to learn the ways of Angular and become a pro like my father.',
       age: 100,
@@ -25,7 +25,7 @@ export class MockCharacterService {
     {
       id: '102',
       firstName: 'MOCK',
-      nickName: 'CHARACTER',
+      alias: 'CHARACTER',
       lastName: 'TWO',
       quote: 'Mock Character One. I am your father!',
       age: 200,
@@ -52,7 +52,7 @@ export class MockCharacterService {
     this.characters().filter((character) => character.status === true),
   );
 
-  readonly aliveCharacterCount = computed(() => this.aliveCharacters().length);
+  readonly aliveCharCount = computed(() => this.aliveCharacters().length);
 
   getCharacter(id: string): Character | undefined {
     return this.getById(id);

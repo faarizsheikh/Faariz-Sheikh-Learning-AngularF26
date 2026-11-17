@@ -23,8 +23,8 @@ export class CharacterService {
   private characters = signal<Character[]>([
     {
       id: '1',
-      firstName: 'Billy',
-      nickName: 'Bill',
+      firstName: 'Bill',
+      alias: 'Billy',
       lastName: 'Denbrough',
       quote:
         'I go home and all I see is that ' +
@@ -46,8 +46,8 @@ export class CharacterService {
     },
     {
       id: '2',
-      firstName: 'George',
-      nickName: 'Georgie',
+      firstName: 'Georgie',
+      alias: 'George',
       lastName: 'Denbrough',
       quote: '(Referring to the boat) She?... She. Thanks, Billy.',
       age: 6,
@@ -63,9 +63,9 @@ export class CharacterService {
     },
     {
       id: '3',
-      firstName: 'Deadlights',
-      nickName: 'IT',
-      lastName: 'Pennywise',
+      firstName: 'Pennywise',
+      alias: 'IT',
+      lastName: 'Deadlights',
       quote:
         "No! 'll take him! I'll take all of you! " +
         "I'll feast on your flesh as I feed on your fear..." +
@@ -88,8 +88,8 @@ export class CharacterService {
     },
     {
       id: '4',
-      firstName: 'Rich',
-      nickName: 'Richie',
+      firstName: 'Richie',
+      alias: 'Rich',
       lastName: 'Tozier',
       quote:
         '(Censored version:) I told you, Bill. I fricking told you. ' +
@@ -114,7 +114,7 @@ export class CharacterService {
     {
       id: '5',
       firstName: 'Stanley',
-      nickName: 'Stan',
+      alias: 'Stan',
       lastName: 'Uris',
       quote: 'No! No next time, Bill!',
       age: 13,
@@ -131,7 +131,7 @@ export class CharacterService {
     {
       id: '6',
       firstName: 'Eddie',
-      nickName: 'Edds',
+      alias: 'Edds',
       lastName: 'Kaspbrak',
       quote: '[To Richie Tozier] -puffs- Have you ever ' + 'heard of a staph infection?',
       age: 13,
@@ -151,7 +151,7 @@ export class CharacterService {
     {
       id: '7',
       firstName: 'Beverly',
-      nickName: 'Bev',
+      alias: 'Bev',
       lastName: 'Marsh',
       quote:
         '[To the Losers] This is what it wants. ' +
@@ -174,8 +174,8 @@ export class CharacterService {
     },
     {
       id: '8',
-      firstName: 'Michael',
-      nickName: 'Mike',
+      firstName: 'Mike',
+      alias: 'Michael',
       lastName: 'Hanlon',
       quote:
         'My grandfather thinks this town is cursed. ' +
@@ -195,8 +195,8 @@ export class CharacterService {
     },
     {
       id: '9',
-      firstName: 'Benjamin',
-      nickName: 'Ben',
+      firstName: 'Ben',
+      alias: 'Benjamin',
       lastName: 'Hanscom',
       quote:
         "[Shouting after Beverly] Please don't go girl! " +
@@ -234,7 +234,7 @@ export class CharacterService {
     this.loadCharacters();
   }
 
-  // Load characters from the API:
+  // Method for loading characters from the API:
   loadCharacters(): void {
     this.isLoading.set(true);
     this.error.set(null);
@@ -252,7 +252,7 @@ export class CharacterService {
       )
       .subscribe({
         next: (apiCharacters) => {
-          const existingCharacters = this.characters();
+          const existingChars = this.characters();
 
           // Merge API data with existing custom character information:
           const mergedCharacters = apiCharacters.map((apiCharacter) => {
@@ -261,33 +261,33 @@ export class CharacterService {
             const apiActor = this.fix(apiCharacter.played_by);
 
             // Find the corresponding manually defined character:
-            const existingCharacter = existingCharacters.find((character) => {
+            const existingChar = existingChars.find((character) => {
               const existingName = this.fix(`${character.firstName}${character.lastName}`);
 
-              const existingNickname = this.fix(`${character.nickName ?? ''}${character.lastName}`);
+              const existingalias = this.fix(`${character.alias ?? ''}${character.lastName}`);
 
               const existingActor = this.fix(character.played_by);
 
               return (
                 apiName === existingName ||
-                apiName === existingNickname ||
+                apiName === existingalias ||
                 existingActor.includes(apiActor) ||
                 apiActor.includes(existingActor)
               );
             });
 
             // Preserve custom information while retaining the API ID:
-            return existingCharacter
+            return existingChar
               ? {
                   ...apiCharacter,
-                  nickName: existingCharacter.nickName,
-                  quote: existingCharacter.quote,
-                  age: existingCharacter.age,
-                  gender: existingCharacter.gender,
-                  status: existingCharacter.status,
-                  character_type: existingCharacter.character_type,
-                  description: existingCharacter.description,
-                  imageLink: existingCharacter.imageLink,
+                  alias: existingChar.alias,
+                  quote: existingChar.quote,
+                  age: existingChar.age,
+                  gender: existingChar.gender,
+                  status: existingChar.status,
+                  character_type: existingChar.character_type,
+                  description: existingChar.description,
+                  imageLink: existingChar.imageLink,
                 }
               : apiCharacter;
           });
@@ -315,7 +315,22 @@ export class CharacterService {
   );
 
   // Count alive characters:
-  readonly aliveCharacterCount = computed(() => this.aliveCharacters().length);
+  readonly aliveCharCount = computed(() => this.aliveCharacters().length);
+
+  // Count character status unless not known:
+  readonly knownStatCharCount = computed(
+    () =>
+      this.characters().filter(
+        (character) => character.status !== null && character.status !== undefined,
+      ).length,
+  );
+
+  // Calculate percentage per known character status who are alive:
+  readonly aliveCharPercentage = computed(() => {
+    const knownCount = this.knownStatCharCount();
+
+    return knownCount === 0 ? 0 : this.aliveCharCount() / knownCount;
+  });
 
   // Retrieve a character:
   getCharacter(id: string): Character | undefined {

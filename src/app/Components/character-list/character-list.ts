@@ -5,16 +5,18 @@ import { CharacterCard } from '../character-card/character-card';
 import { removeEvent } from '../../Shared/Models/remove-event-data';
 import { CharacterService } from '../../Shared/Services/character-service';
 import { RouterLink } from '@angular/router';
+import { DecimalPipe, PercentPipe } from '@angular/common';
 
 @Component({
-  imports: [CharacterCard, RouterLink],
+  imports: [CharacterCard, RouterLink, DecimalPipe, PercentPipe],
   selector: 'app-character-list',
   styleUrl: './character-list.scss',
   templateUrl: './character-list.html',
 })
 export class CharacterList {
   private charactersService = inject(CharacterService);
-  aliveCharacterCount = this.charactersService.aliveCharacterCount;
+  aliveCharCount = this.charactersService.aliveCharCount;
+  aliveCharPercentage = this.charactersService.aliveCharPercentage;
   characters = this.charactersService.charactersList;
   dataSource = this.charactersService.apiBaseUrl;
 

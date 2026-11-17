@@ -34,7 +34,7 @@ export function mapTMDBCastMember(castMember: TMDBCastMember): Character {
   return {
     id: castMember.credit_id,
     firstName,
-    nickName: undefined,
+    alias: undefined,
     lastName,
     quote: '',
     age: undefined,

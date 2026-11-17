@@ -10,15 +10,17 @@
 
     <h3 class="name">
       @if (character().firstName.length >= 10 || character().lastName.length >= 10) {
-        <span class="longer"> {{ character().firstName }}<br />{{ character().lastName }} </span>
+        <span class="longer">
+          {{ character().firstName | titlecase }}<br />{{ character().lastName | titlecase }}
+        </span>
       } @else {
         <span class="shorter">
           {{
-            character().nickName
-              ? character().firstName + ' "' + character().nickName + '"'
-              : character().firstName
+            character().alias
+              ? (character().firstName | titlecase) + ' "' + (character().alias | titlecase) + '"'
+              : (character().firstName | titlecase)
           }}
-          {{ character().lastName }}
+          {{ character().lastName | titlecase }}
         </span>
       }
     </h3>
@@ -62,7 +64,7 @@
       [alt]="'character().firstName ' + 'character().lastName'"
       [title]="'character().firstName ' + 'character().lastName'"
     />
-    <p><strong>Played by:</strong>{{ character().played_by }}</p>
+    <p><strong>Played by:</strong>{{ character().played_by | titlecase }}</p>
   </div>
 
   <div class="card-footer">

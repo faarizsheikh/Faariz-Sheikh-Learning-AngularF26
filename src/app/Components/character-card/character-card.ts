@@ -1,13 +1,13 @@
 // CHARACTER CARD COMPONENT CLASS (character-card.component.ts):
 
-import { NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage, TitleCasePipe } from '@angular/common';
 import { Component, input, output } from '@angular/core';
 import { Character } from '../../Shared/Models/character-data';
 import { removeEvent } from '../../Shared/Models/remove-event-data';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [NgOptimizedImage, RouterLink],
+  imports: [NgOptimizedImage, RouterLink, TitleCasePipe],
   selector: 'app-character-card',
   styleUrl: './character-card.scss',
   templateUrl: './character-card.html',

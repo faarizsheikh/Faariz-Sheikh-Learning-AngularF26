@@ -1,7 +1,7 @@
 // CHARACTER DATA INTERFACE (character-data.ts):
 
 export interface ExtraInfo {
-  nickName?: string;
+  alias?: string;
   quote?: string;
   age?: number;
   description?: string;
