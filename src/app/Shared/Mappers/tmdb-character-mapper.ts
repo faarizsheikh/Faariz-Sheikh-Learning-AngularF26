@@ -6,6 +6,7 @@ import type { TMDBCastMember, TMDBCreditsResponse } from '../Models/tmdb-credits
 // Existing local character images:
 const asset_prefix = '../../Assets/character-images/';
 
+// Dictinary holding the array: Direct looks up, no looping, logic seperate from data
 const charImages: Record<string, string> = {
   billdenbrough: asset_prefix + 'bill-den.png',
   georgiedenbrough: asset_prefix + 'george-den.png',

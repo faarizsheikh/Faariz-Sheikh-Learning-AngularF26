@@ -8,6 +8,7 @@ import { CharacterList } from './Components/character-list/character-list';
 import { PageNotFound } from './Components/page-not-found/page-not-found';
 
 export const routes: Routes = [
+  // Exact Routes:
   { path: '', redirectTo: '/characters', pathMatch: 'full' },
   { path: 'characters', component: CharacterList },
   { path: 'characters/add', component: CharacterForm },
@@ -15,6 +16,7 @@ export const routes: Routes = [
   { path: 'characters/:id/view', component: CharacterDetail },
   { path: 'characters/:id/edit', component: CharacterForm, canActivate: [editGuard] },
 
+  // Typos:
   { path: 'char', redirectTo: '/characters', pathMatch: 'full' },
   { path: 'chars', redirectTo: '/characters', pathMatch: 'full' },
   { path: 'character', redirectTo: '/characters', pathMatch: 'full' },
@@ -41,5 +43,6 @@ export const routes: Routes = [
   { path: 'chars/:id/edit', redirectTo: '/characters/:id/edit', pathMatch: 'full' },
   { path: 'character/:id/edit', redirectTo: '/characters/:id/edit', pathMatch: 'full' },
 
+  // Wildcard: Page NOT found:
   { path: '**', component: PageNotFound },
 ];
