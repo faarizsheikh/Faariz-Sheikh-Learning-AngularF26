@@ -20,6 +20,6 @@ export class TruncatePipe implements PipeTransform {
     }
 
     // Truncate based on limit num (defaulted to 60 as set above; otherwise uses given value where pipe used)
-    return `${value.slice(0, limit).trimEnd()}…`; // Removes spaces before the elipses.
+    return `${value.slice(0, limit).trimEnd()}…`; // Removes spaces before the ellipses.
   }
 }

@@ -1,6 +1,6 @@
 // MOCK CHARACTERS SERVICE (mock-character-service.ts):
 
-import { Injectable, computed, signal, effect } from '@angular/core';
+import { Injectable, signal, effect } from '@angular/core';
 import { Character } from '../Models/character-data';
 
 @Injectable({
@@ -43,52 +43,6 @@ export class MockCharacterService {
   constructor() {
     effect(() => {
       console.log(`Character count: ${this.characters().length}`);
-    });
-  }
-
-  readonly charactersList = this.characters.asReadonly();
-
-  readonly aliveCharacters = computed(() =>
-    this.characters().filter((character) => character.status === true),
-  );
-
-  readonly aliveCharCount = computed(() => this.aliveCharacters().length);
-
-  getCharacter(id: string): Character | undefined {
-    return this.getById(id);
-  }
-
-  getById(id: string): Character | undefined {
-    return this.characters().find((character) => character.id === id);
-  }
-
-  addCharacter(character: Character): void {
-    this.characters.update((list) => [...list, character]);
-  }
-
-  removeCharacter(id: string): void {
-    this.characters.update((list) => list.filter((character) => character.id !== id));
-  }
-
-  updateCharacter(updated: Character): void {
-    this.characters.update((list) =>
-      list.map((character) => (character.id === updated.id ? updated : character)),
-    );
-  }
-
-  toggleStat(id: string, status: boolean | undefined): void {
-    this.characters.update((list) => {
-      const index = list.findIndex((character) => character.id === id);
-
-      if (index === -1) return list;
-
-      const updated = [...list];
-
-      updated[index] = {
-        ...updated[index],
-        status,
-      };
-      return updated;
     });
   }
 }

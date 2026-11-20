@@ -88,12 +88,35 @@ The API returns a JSON object containing three top-level properties: `id`, `cast
 
 This product uses the TMDB API but is not endorsed or certified by TMDB.
 
-
 ### Loading API Data
 
 The application uses Angular's HttpClient to retrieve character credits from TMDB. The API response contains a cast array inside an object, so RxJS map and mapTMDBCreditsResponse transform the response into the application's Character model before updating the existing writable signal. I chose HttpClient because it is supported in Angular 21 and integrates directly with the existing signal-based CRUD operations.
 
-
 ### Local Data Changes
 
 Adding, editing, and deleting characters only modifies the application's in-memory signal. There are no POST, PUT, PATCH, or DELETE requests sent to TMDB. Refreshing the page would reload the original API data because the local changes are not saved to the server.
+
+## Lazy loading
+
+### Before lazy loading
+
+Initial chunk files | Names         |  Raw size | Estimated transfer size
+main-O4EQE7W3.js    | main          | 364.27 kB |                94.53 kB
+styles-EIGNNWN7.css | styles        |   2.62 kB |               717 bytes
+
+                    | Initial total | 366.90 kB |                95.24 kB
+
+### After lazy loading
+
+Initial chunk files | Names            |  Raw size | Estimated transfer size
+main-WA7RYRPT.js    | main             | 300.13 kB |                82.13 kB
+styles-EIGNNWN7.css | styles           |   2.62 kB |               717 bytes
+
+                    | Initial total    | 302.76 kB |                82.84 kB
+
+Lazy chunk files    | Names            |  Raw size | Estimated transfer size
+chunk-CDq6JWYy.js   | character-form   |  60.21 kB |                12.93 kB
+chunk-DvbSVffi.js   | character-detail |   6.67 kB |                 2.14 kB
+chunk-DSyHD1LM.js   | page-not-found   | 551 bytes |               551 bytes
+
+The character detail page, character forms, and page-not found are lazy-loaded using Angular's `loadComponent` and dynamic imports. It reduces the JavaScript included in the initial download because these pages are loaded only when the user visits their routes. The character list is still eagerly loaded because it is the main / landing page of the application.

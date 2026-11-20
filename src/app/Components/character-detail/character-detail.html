@@ -15,7 +15,12 @@
   } @else if (character(); as c) {
     <div class="card-header">
       <h3 class="name">
-        {{ c.firstName | titlecase }} "{{ c.alias | titlecase }}" {{ c.lastName | titlecase }}
+        {{
+          c.alias
+            ? (c.firstName | titlecase) + ' "' + (c.alias | titlecase) + '"'
+            : (c.firstName | titlecase)
+        }}
+        {{ c.lastName | titlecase }}
       </h3>
 
       <img
@@ -30,9 +35,11 @@
     </div>
 
     <div class="card-body">
-      <blockquote [class]="c.quote ? 'quote' : 'no-quote'">
-        {{ c.quote | truncate: 180 }}
-      </blockquote>
+      @if (c.quote) {
+        <blockquote class="quote">
+          {{ c.quote | truncate: 180 }}
+        </blockquote>
+      }
 
       <p class="age">
         <strong>Age:</strong>{{ c.age === undefined ? 'Unknown' : (c.age | number: '1.0-0') }}

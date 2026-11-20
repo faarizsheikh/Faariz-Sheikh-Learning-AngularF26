@@ -4,7 +4,6 @@ import { Component, inject, input, OnInit } from '@angular/core';
 import {
   FormBuilder,
   ReactiveFormsModule,
-  isFormControl,
   Validators,
   AbstractControl,
   ValidationErrors,
@@ -174,7 +173,7 @@ export class CharacterForm implements OnInit {
         this.updateAgeControls();
         this.characterForm.updateValueAndValidity();
       } else {
-        this.router.navigate(['/characters']);
+        void this.router.navigate(['/characters']);
       }
     }
   }
@@ -194,7 +193,7 @@ export class CharacterForm implements OnInit {
       const existingCharacter = this.characterService.getCharacter(id);
 
       if (!existingCharacter) {
-        this.router.navigate(['/characters']);
+        void this.router.navigate(['/characters']);
         return;
       }
 
@@ -222,7 +221,7 @@ export class CharacterForm implements OnInit {
       this.characterService.updateCharacter(updatedCharacter);
 
       // Navigate back to the character details:
-      this.router.navigate(['/characters', id, 'view']);
+      void this.router.navigate(['/characters', id, 'view']);
 
       console.log(
         `Character ${updatedCharacter.firstName} ${updatedCharacter.alias} ${updatedCharacter.lastName} has been updated.`,
@@ -261,7 +260,7 @@ export class CharacterForm implements OnInit {
     this.characterForm.reset();
 
     // Navigate to the new character's details:
-    this.router.navigate(['/characters', newId, 'view']);
+    void this.router.navigate(['/characters', newId, 'view']);
 
     console.log(
       `Character ${newCharacter.firstName} ${newCharacter.alias} ${newCharacter.lastName} has been added.`,
@@ -390,6 +389,4 @@ export class CharacterForm implements OnInit {
       age.enable();
     }
   }
-
-  protected readonly isFormControl = isFormControl;
 }

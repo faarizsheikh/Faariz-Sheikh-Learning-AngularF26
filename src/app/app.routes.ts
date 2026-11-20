@@ -2,18 +2,30 @@
 
 import { Routes } from '@angular/router';
 import { editGuard } from './Shared/Guards/edit.guard';
-import { CharacterDetail } from './Components/character-detail/character-detail';
-import { CharacterForm } from './Components/character-form/character-form';
 import { CharacterList } from './Components/character-list/character-list';
-import { PageNotFound } from './Components/page-not-found/page-not-found';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/characters', pathMatch: 'full' },
   { path: 'characters', component: CharacterList },
-  { path: 'characters/add', component: CharacterForm },
 
-  { path: 'characters/:id/view', component: CharacterDetail },
-  { path: 'characters/:id/edit', component: CharacterForm, canActivate: [editGuard] },
+  {
+    path: 'characters/add',
+    loadComponent: () =>
+      import('./Components/character-form/character-form').then((m) => m.CharacterForm),
+  },
+
+  {
+    path: 'characters/:id/view',
+    loadComponent: () =>
+      import('./Components/character-detail/character-detail').then((m) => m.CharacterDetail),
+  },
+
+  {
+    path: 'characters/:id/edit',
+    loadComponent: () =>
+      import('./Components/character-form/character-form').then((m) => m.CharacterForm),
+    canActivate: [editGuard],
+  },
 
   { path: 'char', redirectTo: '/characters', pathMatch: 'full' },
   { path: 'chars', redirectTo: '/characters', pathMatch: 'full' },
@@ -41,5 +53,9 @@ export const routes: Routes = [
   { path: 'chars/:id/edit', redirectTo: '/characters/:id/edit', pathMatch: 'full' },
   { path: 'character/:id/edit', redirectTo: '/characters/:id/edit', pathMatch: 'full' },
 
-  { path: '**', component: PageNotFound },
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./Components/page-not-found/page-not-found').then((m) => m.PageNotFound),
+  },
 ];
