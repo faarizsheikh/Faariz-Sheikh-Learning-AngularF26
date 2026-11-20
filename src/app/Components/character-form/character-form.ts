@@ -1,6 +1,14 @@
 // CHARACTER FORM COMPONENT CLASS (character-form.component.ts):
 
-import { Component, inject, input, OnInit } from '@angular/core';
+import {
+  afterNextRender,
+  Component,
+  ElementRef,
+  inject,
+  input,
+  OnInit,
+  viewChild,
+} from '@angular/core';
 import {
   FormBuilder,
   ReactiveFormsModule,
@@ -23,6 +31,16 @@ export class CharacterForm implements OnInit {
   private fb = inject(FormBuilder);
   private characterService = inject(CharacterService);
   private router = inject(Router);
+
+  // Reference to the first input field:
+  private firstField = viewChild<ElementRef<HTMLInputElement>>('firstField');
+
+  constructor() {
+    // Waits until Angular renders the DOM:
+    afterNextRender(() => {
+      this.firstField()?.nativeElement.focus();
+    });
+  }
 
   // Route input:
   id = input<string | undefined>();
