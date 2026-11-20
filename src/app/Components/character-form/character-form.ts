@@ -36,7 +36,7 @@ export class CharacterForm implements OnInit {
   private firstField = viewChild<ElementRef<HTMLInputElement>>('firstField');
 
   constructor() {
-    // Waits until Angular renders the DOM:
+    // afterNextRender waits until Angular renders the DOM; While ngOnInit runs before the view is rendered:
     afterNextRender(() => {
       this.firstField()?.nativeElement.focus();
     });
