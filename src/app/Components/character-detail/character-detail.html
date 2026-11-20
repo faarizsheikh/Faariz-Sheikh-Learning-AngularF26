@@ -30,7 +30,9 @@
     </div>
 
     <div class="card-body">
-      <blockquote [class]="c.quote ? 'quote' : 'no-quote'">{{ c.quote }}</blockquote>
+      <blockquote [class]="c.quote ? 'quote' : 'no-quote'">
+        {{ c.quote | truncate: 180 }}
+      </blockquote>
 
       <p class="age">
         <strong>Age:</strong>{{ c.age === undefined ? 'Unknown' : (c.age | number: '1.0-0') }}
@@ -65,15 +67,14 @@
         <p>
           <strong>Status:</strong>
 
-          @if (c.status !== undefined) {
-            @if (c.status) {
-              <span class="status alive">Alive</span>
-            } @else {
-              <span class="status dead">Dead</span>
-            }
-          } @else {
-            <span class="status unknown">Unknown</span>
-          }
+          <span
+            class="status"
+            [class.alive]="c.status === true"
+            [class.dead]="c.status === false"
+            [class.unknown]="c.status == null"
+          >
+            {{ c.status | characterStatus | uppercase }}
+          </span>
         </p>
       </div>
 
@@ -81,7 +82,8 @@
         class="character-description"
         [class]="c.description.length <= 117 ? 'short-desc' : 'long-desc'"
       >
-        <strong>Description:</strong>{{ c.description ? c.description : 'N/A' }}
+        <strong>Description:</strong>
+        {{ c.description ? (c.description | truncate: 180) : 'N/A' }}
       </p>
     </div>
 

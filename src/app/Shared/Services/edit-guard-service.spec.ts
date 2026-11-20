@@ -1,4 +1,4 @@
-// EDIT GUARD SERVICE (edit-guard-service.ts):
+// EDIT GUARD SERVICE UNIT TESTS (edit-guard-service.spec.ts):
 
 import { TestBed } from '@angular/core/testing';
 import { EditGuardService } from './edit-guard-service';

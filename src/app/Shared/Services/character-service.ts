@@ -92,12 +92,12 @@ export class CharacterService {
       alias: 'Rich',
       lastName: 'Tozier',
       quote:
-        '(Censored version:) I told you, Bill. I fricking told you. ' +
+        'I told you, Bill. I fucking told you. ' +
         "I don't wanna die. It's your fault. " +
         'You punched me in the face, ' +
-        'you made me walk through crappy water, ' +
-        'you dragged me into a damn crackhead house! ' +
-        "And now...I'm gonna have to kill this fricking clown.",
+        'you made me walk through shitty water, ' +
+        'you dragged me into a fucking crackhead house! ' +
+        "And now...I'm gonna have to kill this fucking clown.",
       age: 13,
       gender: 'Male',
       status: true,

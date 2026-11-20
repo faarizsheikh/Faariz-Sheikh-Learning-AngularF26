@@ -1,4 +1,4 @@
-/* -- PAGE NOT FOUND COMPONENT UNIT TESTING (page-not-found.component.spec.ts): -- */
+/* -- PAGE NOT FOUND COMPONENT UNIT TESTS (page-not-found.component.spec.ts): -- */
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PageNotFound } from './page-not-found';
